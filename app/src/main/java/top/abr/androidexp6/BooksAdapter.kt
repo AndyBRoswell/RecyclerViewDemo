@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<BooksAdapter.BookViewHolder>() {
+open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<BooksAdapter.BookViewHolder>() {
 	class BookViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
 		val BookCoverView: ImageView = ItemView.findViewById(R.id.image_view_book_cover)
 		val BookTitleView: TextView = ItemView.findViewById(R.id.text_view_book_title)
