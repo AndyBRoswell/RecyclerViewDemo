@@ -18,37 +18,37 @@ class BookListMainActivity : AppCompatActivity() {
 		)
 	)
 
-	lateinit var BookListView: RecyclerView
+	lateinit var BookListView: RecyclerViewWithContextMenu
 
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
 		setContentView(R.layout.activity_main)
 
 		BookListView = findViewById(R.id.recycle_view_books)
-		registerForContextMenu(BookListView)
+//		registerForContextMenu(BookListView)
 		BookListView.adapter = BooksAdapter(BookList)
 		BookListView.layoutManager = LinearLayoutManager(this)
 	}
 
-	fun CreateMenu(M: Menu) {
-		val GroupID = 0
-		val Order = 0
-		val ItemIDs = intArrayOf(1, 2)
-
-		for (ItemID in ItemIDs) {
-			when (ItemID) {
-				1 -> M.add(GroupID, ItemID, Order, "编辑")
-				2 -> M.add(GroupID, ItemID, Order, "删除")
-			}
-		}
-	}
-
-	override fun onCreateContextMenu(M: ContextMenu?, V: View?, MenuInfo: ContextMenu.ContextMenuInfo?) {
-		val CtxMenuInfo = MenuInfo as RecyclerViewWithContextMenu.RecyclerViewContextInfo?
-		if (CtxMenuInfo != null && CtxMenuInfo.Position >= 0) {
-			CreateMenu(M!!)
-		}
-	}
+//	fun CreateMenu(M: Menu) {
+//		val GroupID = 0
+//		val Order = 0
+//		val ItemIDs = intArrayOf(1, 2)
+//
+//		for (ItemID in ItemIDs) {
+//			when (ItemID) {
+//				1 -> M.add(GroupID, ItemID, Order, "编辑")
+//				2 -> M.add(GroupID, ItemID, Order, "删除")
+//			}
+//		}
+//	}
+//
+//	override fun onCreateContextMenu(M: ContextMenu?, V: View?, MenuInfo: ContextMenu.ContextMenuInfo?) {
+//		val CtxMenuInfo = MenuInfo as RecyclerViewWithContextMenu.RecyclerViewContextInfo?
+//		if (CtxMenuInfo != null && CtxMenuInfo.Position >= 0) {
+//			CreateMenu(M!!)
+//		}
+//	}
 
 	override fun onContextItemSelected(I: MenuItem): Boolean {
 		when (I.itemId) {
