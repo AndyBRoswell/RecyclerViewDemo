@@ -1,5 +1,6 @@
 package top.abr.androidexp6
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,10 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 		}
 	}
 
+	private lateinit var MContext: Context
+
 	override fun onCreateViewHolder(Parent: ViewGroup, ViewType: Int): BookViewHolder {
+		if (MContext == null) MContext = Parent.context
 		val ItemView = LayoutInflater.from(Parent.context).inflate(R.layout.item_layout, Parent, false)
 		return BookViewHolder(ItemView)
 	}
