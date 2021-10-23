@@ -42,7 +42,10 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 
 		override fun onMenuItemClick(MItem: MenuItem): Boolean {
 			when (MItem.itemId) {
-
+				2 -> {
+					BookList.removeAt(adapterPosition)
+					notifyItemRemoved(adapterPosition)
+				}
 			}
 			return true
 		}
@@ -71,6 +74,8 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 //		Holder.itemView.setOnLongClickListener(null)
 //		super.onViewRecycled(Holder)
 //	}
+
+
 
 	override fun getItemCount() = BookList.size
 }
