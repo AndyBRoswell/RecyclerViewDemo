@@ -19,12 +19,13 @@ class BookListMainActivity : AppCompatActivity() {
 		)
 	)
 
-	val BookListView: RecyclerView = findViewById(R.id.recycle_view_books)
+	lateinit var BookListView: RecyclerView
 
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
 		setContentView(R.layout.activity_main)
 
+		BookListView = findViewById(R.id.recycle_view_books)
 		registerForContextMenu(BookListView)
 		BookListView.adapter = BooksAdapter(BookList)
 		BookListView.layoutManager = LinearLayoutManager(this)
@@ -54,7 +55,7 @@ class BookListMainActivity : AppCompatActivity() {
 
 	override fun onContextItemSelected(I: MenuItem): Boolean {
 		when (I.itemId) {
-			
+
 		}
 		return super.onContextItemSelected(I)
 	}
