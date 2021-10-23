@@ -19,7 +19,7 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 		}
 	}
 
-	private lateinit var MContext: Context
+	private var MContext: Context? = null
 
 	override fun onCreateViewHolder(Parent: ViewGroup, ViewType: Int): BookViewHolder {
 		if (MContext == null) MContext = Parent.context

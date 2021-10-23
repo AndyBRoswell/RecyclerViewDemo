@@ -1,6 +1,5 @@
 package top.abr.androidexp6
 
-import android.content.ClipData
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextMenu
@@ -45,10 +44,8 @@ class BookListMainActivity : AppCompatActivity() {
 	}
 
 	override fun onCreateContextMenu(M: ContextMenu?, V: View?, MenuInfo: ContextMenu.ContextMenuInfo?) {
-		val CtxMenuInfo: RecyclerViewWithContextMenu.RecyclerViewContextInfo = MenuInfo as RecyclerViewWithContextMenu.RecyclerViewContextInfo
+		val CtxMenuInfo = MenuInfo as RecyclerViewWithContextMenu.RecyclerViewContextInfo?
 		if (CtxMenuInfo != null && CtxMenuInfo.Position >= 0) {
-			val A: BooksAdapter = BookListView.adapter as BooksAdapter
-			val SelectedItem = A.BookList[CtxMenuInfo.Position]
 			CreateMenu(M!!)
 		}
 	}
