@@ -3,6 +3,7 @@ package top.abr.androidexp6
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -57,7 +58,9 @@ class BookListMainActivity : AppCompatActivity() {
 //	override fun onContextItemSelected(MItem: MenuItem): Boolean {
 //		when (MItem.itemId) {
 //			2 -> {
-//				MItem.findView
+//				val TargetedContextMenuInfo = MItem.menuInfo as AdapterView.AdapterContextMenuInfo
+//				val MainBooksAdapter = BookListView.adapter as BooksAdapter
+//				MainBooksAdapter.DeleteBookItem(TargetedContextMenuInfo.position)
 //			}
 //		}
 //		return super.onContextItemSelected(MItem)

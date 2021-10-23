@@ -43,8 +43,7 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 		override fun onMenuItemClick(MItem: MenuItem): Boolean {
 			when (MItem.itemId) {
 				2 -> {
-					BookList.removeAt(adapterPosition)
-					notifyItemRemoved(adapterPosition)
+					DeleteBookItem(adapterPosition)
 				}
 			}
 			return true
@@ -62,12 +61,10 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 
 	override fun onBindViewHolder(Holder: BookViewHolder, Position: Int) {
 		Holder.Bind(BookList[Position])
-//		Holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
-//			override fun onLongClick(v: View?): Boolean {
-//				MPosition = Holder.layoutPosition
-//				return false
-//			}
-//		})
+//		Holder.itemView.setOnLongClickListener {
+//			MPosition = Holder.layoutPosition
+//			false
+//		}
 	}
 
 //	override fun onViewRecycled(Holder: BookViewHolder) {
@@ -75,7 +72,10 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 //		super.onViewRecycled(Holder)
 //	}
 
-
-
 	override fun getItemCount() = BookList.size
+
+	fun DeleteBookItem(Pos: Int) {
+		BookList.removeAt(Pos)
+		notifyItemRemoved(Pos)
+	}
 }
