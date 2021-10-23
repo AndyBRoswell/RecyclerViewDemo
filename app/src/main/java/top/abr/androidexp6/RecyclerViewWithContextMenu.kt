@@ -6,7 +6,7 @@ import android.view.ContextMenu
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerViewWithContextMenu : RecyclerView {
+open class RecyclerViewWithContextMenu : RecyclerView {
 	class RecyclerViewContextInfo : ContextMenu.ContextMenuInfo {
 		var Position = -1
 	}

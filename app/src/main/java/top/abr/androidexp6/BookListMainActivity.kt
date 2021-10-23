@@ -18,7 +18,8 @@ class BookListMainActivity : AppCompatActivity() {
 		)
 	)
 
-	lateinit var BookListView: RecyclerViewWithContextMenu
+	lateinit var BookListView: RecyclerView
+//	lateinit var BookListView: RecyclerViewWithContextMenu
 
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
@@ -26,6 +27,12 @@ class BookListMainActivity : AppCompatActivity() {
 
 		BookListView = findViewById(R.id.recycle_view_books)
 //		registerForContextMenu(BookListView)
+//		BookListView.setOnCreateContextMenuListener { M, _, MenuInfo ->
+//			val CtxMenuInfo = MenuInfo as RecyclerViewWithContextMenu.RecyclerViewContextInfo?
+//			if (CtxMenuInfo != null && CtxMenuInfo.Position >= 0) {
+//				CreateMenu(M!!)
+//			}
+//		}
 		BookListView.adapter = BooksAdapter(BookList)
 		BookListView.layoutManager = LinearLayoutManager(this)
 	}
@@ -42,7 +49,7 @@ class BookListMainActivity : AppCompatActivity() {
 //			}
 //		}
 //	}
-//
+
 //	override fun onCreateContextMenu(M: ContextMenu?, V: View?, MenuInfo: ContextMenu.ContextMenuInfo?) {
 //		val CtxMenuInfo = MenuInfo as RecyclerViewWithContextMenu.RecyclerViewContextInfo?
 //		if (CtxMenuInfo != null && CtxMenuInfo.Position >= 0) {
