@@ -7,11 +7,12 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 open class RecyclerViewWithContextMenu : RecyclerView {
-	class RecyclerViewContextInfo : ContextMenu.ContextMenuInfo {
+	open class RecyclerViewContextInfo : ContextMenu.ContextMenuInfo {
 		var Position = -1
 	}
 
-	private val ContextInfo: RecyclerViewContextInfo = RecyclerViewContextInfo()
+	var ContextInfo: RecyclerViewContextInfo = RecyclerViewContextInfo()
+		private set
 
 	constructor(Ctx: Context) : super(Ctx)
 
@@ -19,7 +20,7 @@ open class RecyclerViewWithContextMenu : RecyclerView {
 
 	constructor(Ctx: Context, Attrs: AttributeSet?, DefStyleAttr: Int) : super(Ctx, Attrs, DefStyleAttr)
 
-	private fun GetPositionByChild(OriginalView: View) {
+	private fun GetChildPosition(OriginalView: View) {
 		if (layoutManager != null) {
 			val Pos = layoutManager!!.getPosition(OriginalView)
 			ContextInfo.Position = Pos
@@ -27,12 +28,12 @@ open class RecyclerViewWithContextMenu : RecyclerView {
 	}
 
 	override fun showContextMenuForChild(OriginalView: View?): Boolean {
-		GetPositionByChild(OriginalView!!)
+		GetChildPosition(OriginalView!!)
 		return super.showContextMenuForChild(OriginalView)
 	}
 
 	override fun showContextMenuForChild(OriginalView: View?, x: Float, y: Float): Boolean {
-		GetPositionByChild(OriginalView!!)
+		GetChildPosition(OriginalView!!)
 		return super.showContextMenuForChild(OriginalView, x, y)
 	}
 }

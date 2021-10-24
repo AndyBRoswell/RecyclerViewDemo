@@ -2,7 +2,7 @@ package top.abr.androidexp6
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.*
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,53 +16,40 @@ class BookListMainActivity : AppCompatActivity() {
 		)
 	)
 
-	lateinit var BookListView: RecyclerView
-//	lateinit var BookListView: RecyclerViewWithContextMenu
+//	lateinit var BookListView: RecyclerView
+	lateinit var BookListView: RecyclerViewWithContextMenu
 
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
 		setContentView(R.layout.activity_main)
 
 		BookListView = findViewById(R.id.recycle_view_books)
-//		registerForContextMenu(BookListView)
-//		BookListView.setOnCreateContextMenuListener { M, _, MenuInfo ->
-//			val CtxMenuInfo = MenuInfo as RecyclerViewWithContextMenu.RecyclerViewContextInfo?
-//			if (CtxMenuInfo != null && CtxMenuInfo.Position >= 0) {
-//				CreateMenu(M!!)
-//			}
-//		}
+		registerForContextMenu(BookListView)
 		BookListView.adapter = BooksAdapter(BookList)
 		BookListView.layoutManager = LinearLayoutManager(this)
 	}
 
-//	fun CreateMenu(M: Menu) {
-//		val GroupID = 0
-//		val Order = 0
-//		val ItemIDs = intArrayOf(1, 2)
-//
-//		for (ItemID in ItemIDs) {
-//			when (ItemID) {
-//				1 -> M.add(GroupID, ItemID, Order, "编辑")
-//				2 -> M.add(GroupID, ItemID, Order, "删除")
-//			}
-//		}
-//	}
+	override fun onCreateContextMenu(M: ContextMenu?, V: View?, MenuInfo: ContextMenu.ContextMenuInfo?) {
+		val GroupID = Menu.NONE
+		val Order = Menu.NONE
+		val ItemIDs = intArrayOf(1, 2)
 
-//	override fun onCreateContextMenu(M: ContextMenu?, V: View?, MenuInfo: ContextMenu.ContextMenuInfo?) {
-//		val CtxMenuInfo = MenuInfo as RecyclerViewWithContextMenu.RecyclerViewContextInfo?
-//		if (CtxMenuInfo != null && CtxMenuInfo.Position >= 0) {
-//			CreateMenu(M!!)
-//		}
-//	}
+		for (ItemID in ItemIDs) {
+			when (ItemID) {
+				1 -> M!!.add(GroupID, ItemID, Order, "编辑")
+				2 -> M!!.add(GroupID, ItemID, Order, "删除")
+			}
+		}
+	}
 
-//	override fun onContextItemSelected(MItem: MenuItem): Boolean {
-//		when (MItem.itemId) {
-//			2 -> {
-//				val TargetedContextMenuInfo = MItem.menuInfo as AdapterView.AdapterContextMenuInfo
-//				val MainBooksAdapter = BookListView.adapter as BooksAdapter
-//				MainBooksAdapter.DeleteBookItem(TargetedContextMenuInfo.position)
-//			}
-//		}
-//		return super.onContextItemSelected(MItem)
-//	}
+	override fun onContextItemSelected(MItem: MenuItem): Boolean {
+		when (MItem.itemId) {
+			2 -> {
+				val MainBooksAdapter = BookListView.adapter as BooksAdapter
+				MainBooksAdapter.DeleteBookItem(BookListView.ContextInfo.Position)
+//				MainBooksAdapter.DeleteBookItem(MainBooksAdapter.MPosition)
+			}
+		}
+		return super.onContextItemSelected(MItem)
+	}
 }
