@@ -28,6 +28,9 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 
 		override fun onMenuItemClick(MItem: MenuItem): Boolean {
 			when (MItem.itemId) {
+				1 -> {
+
+				}
 				2 -> {
 					DeleteBookItem(adapterPosition)
 				}
