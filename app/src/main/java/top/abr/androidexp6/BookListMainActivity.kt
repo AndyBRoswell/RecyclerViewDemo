@@ -2,6 +2,7 @@ package top.abr.androidexp6
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,5 +25,15 @@ class BookListMainActivity : AppCompatActivity() {
 		BookListView = findViewById(R.id.recycle_view_books)
 		BookListView.adapter = BooksAdapter(BookList)
 		BookListView.layoutManager = LinearLayoutManager(this)
+	}
+
+	override fun onContextItemSelected(MItem: MenuItem): Boolean {
+		when (MItem.itemId) {
+			1 -> {
+				val MainBooksAdapter = BookListView.adapter as BooksAdapter
+				MainBooksAdapter.DeleteBookItem(MainBooksAdapter.MPosition)
+			}
+		}
+		return super.onContextItemSelected(MItem)
 	}
 }

@@ -10,7 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 
 open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<BooksAdapter.BookViewHolder>() {
-	open inner class BookViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView), View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
+	open inner class BookViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView), View.OnCreateContextMenuListener/*, MenuItem.OnMenuItemClickListener*/ {
 		val BookCoverView: ImageView = ItemView.findViewById(R.id.image_view_book_cover)
 		val BookTitleView: TextView = ItemView.findViewById(R.id.text_view_book_title)
 
@@ -24,24 +24,14 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 		}
 
 		override fun onCreateContextMenu(M: ContextMenu?, V: View?, MenuInfo: ContextMenu.ContextMenuInfo?) {
-			val Edit: MenuItem = M!!.add(Menu.NONE, 1, 1, "编辑")
-			val Delete: MenuItem = M.add(Menu.NONE, 2, 2, "删除")
-			Edit.setOnMenuItemClickListener(this)
-			Delete.setOnMenuItemClickListener(this)
-		}
-
-		override fun onMenuItemClick(MItem: MenuItem): Boolean {
-			when (MItem.itemId) {
-				1 -> {
-
-				}
-				2 -> {
-					DeleteBookItem(adapterPosition)
-				}
+			val MenuItemHeaders = arrayOf("编辑", "删除")
+			for (i in MenuItemHeaders.indices) {
+				M!!.add(Menu.NONE, i, i, MenuItemHeaders[i])
 			}
-			return true
 		}
 	}
+
+	var MPosition = -1
 
 	override fun onCreateViewHolder(Parent: ViewGroup, ViewType: Int): BookViewHolder {
 		val ItemView = LayoutInflater.from(Parent.context).inflate(R.layout.item_layout, Parent, false)
@@ -50,6 +40,10 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 
 	override fun onBindViewHolder(Holder: BookViewHolder, Position: Int) {
 		Holder.Bind(BookList[Position])
+		Holder.itemView.setOnLongClickListener {
+			MPosition = Holder.layoutPosition
+			false
+		}
 	}
 
 	override fun onViewRecycled(Holder: BookViewHolder) {
