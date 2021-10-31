@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:paddingLeft="16dp"
-	android:paddingRight="16dp"
-	android:orientation="vertical" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+	<data>
+		<variable
+			name="Handlers"
+			type="top.abr.androidexp6.EditBookActivity.EditBookEventHandler" />
+	</data>
 
-	<TextView
+	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="图书名称" />
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:paddingLeft="16dp"
+		android:paddingRight="16dp">
 
-	<EditText
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content" />
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="图书名称" />
 
-	<Button
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="确定" />
+		<EditText
+			android:id="@+id/edit_book_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
 
-	<Button
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="取消" />
+		<Button
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:onClick="@{Handlers::OnClickButtonOK}"
+			android:text="确定" />
 
-</LinearLayout>
+		<Button
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:onClick="@{Handlers::OnClickButtonCancel}"
+			android:text="取消" />
+
+	</LinearLayout>
+</layout>

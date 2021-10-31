@@ -2,10 +2,28 @@ package top.abr.androidexp6
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import top.abr.androidexp6.databinding.ActivityEditBookBinding
 
 class EditBookActivity : AppCompatActivity() {
+	open inner class EditBookEventHandler {
+		fun OnClickButtonOK(V: View) {
+
+		}
+
+		fun OnClickButtonCancel(V: View) {
+
+		}
+	}
+
+	lateinit var ActivityEditBook: ActivityEditBookBinding
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_edit_book)
+
+		ActivityEditBook = ActivityEditBookBinding.inflate(layoutInflater)
+		setContentView(ActivityEditBook.root)
+
+		ActivityEditBook.editBookTitle.setText(intent.getStringExtra("Book.Title"))
 	}
 }
