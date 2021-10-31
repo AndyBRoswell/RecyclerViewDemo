@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import top.abr.androidexp6.databinding.ActivityMainBinding
 
 class BookListMainActivity : AppCompatActivity() {
 	open inner class EditBookInformation : ActivityResultContract<Book, Book>() {
@@ -32,24 +33,31 @@ class BookListMainActivity : AppCompatActivity() {
 		)
 	)
 
+	lateinit var ActivityMain: ActivityMainBinding
 	lateinit var BookListView: RecyclerView
+	lateinit var MainBooksAdapter: BooksAdapter
+	lateinit var EditBookActivityLauncher: ActivityResultLauncher<Book>
 
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
-		setContentView(R.layout.activity_main)
 
-		BookListView = findViewById(R.id.recycle_view_books)
+		ActivityMain = ActivityMainBinding.inflate(layoutInflater)
+		setContentView(ActivityMain.root)
+
+		BookListView = ActivityMain.recycleViewBooks
 		BookListView.adapter = BooksAdapter(BookList)
 		BookListView.layoutManager = LinearLayoutManager(this)
+
+		MainBooksAdapter = BookListView.adapter as BooksAdapter
+		EditBookActivityLauncher = registerForActivityResult(EditBookInformation()) {
+			BookList[MainBooksAdapter.MPosition].Title = it.Title
+		}
 	}
 
 	override fun onContextItemSelected(MItem: MenuItem): Boolean {
-		val MainBooksAdapter = BookListView.adapter as BooksAdapter
 		when (MItem.itemId) {
 			0 -> {
-				val EditBookActivityLauncher = registerForActivityResult(EditBookInformation()) {
-					BookList[MainBooksAdapter.MPosition].Title = it.Title
-				}.launch(MainBooksAdapter.BookList[MainBooksAdapter.MPosition])
+				EditBookActivityLauncher.launch(MainBooksAdapter.BookList[MainBooksAdapter.MPosition])
 			}
 			1 -> {
 				MainBooksAdapter.DeleteBookItem(MainBooksAdapter.MPosition)
