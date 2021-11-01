@@ -52,7 +52,7 @@ class BookListMainActivity : AppCompatActivity() {
 
 		MainBooksAdapter = BookListView.adapter as BooksAdapter
 		EditBookActivityLauncher = registerForActivityResult(EditBookInformation()) {
-			BookList[MainBooksAdapter.MPosition].Title = it.Title
+			if (it != null) BookList[MainBooksAdapter.MPosition].Title = it.Title
 		}
 	}
 

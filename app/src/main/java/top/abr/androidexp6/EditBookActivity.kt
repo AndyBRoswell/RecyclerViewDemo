@@ -1,5 +1,6 @@
 package top.abr.androidexp6
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,7 +13,8 @@ class EditBookActivity : AppCompatActivity() {
 		}
 
 		fun OnClickButtonCancel(V: View) {
-
+			setResult(Activity.RESULT_CANCELED)
+			finish()
 		}
 	}
 
