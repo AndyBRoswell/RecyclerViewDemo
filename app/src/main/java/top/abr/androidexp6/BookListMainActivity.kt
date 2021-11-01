@@ -41,12 +41,12 @@ class BookListMainActivity : AppCompatActivity() {
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
 
-//		ActivityMain = ActivityMainBinding.inflate(layoutInflater)
-//		setContentView(ActivityMain.root)
-		setContentView(R.layout.activity_main)
+		ActivityMain = ActivityMainBinding.inflate(layoutInflater)
+		setContentView(ActivityMain.root)
+//		setContentView(R.layout.activity_main)
 
-		BookListView = findViewById(R.id.recycle_view_books)
-//		BookListView = ActivityMain.recycleViewBooks
+//		BookListView = findViewById(R.id.recycle_view_books)
+		BookListView = ActivityMain.recycleViewBooks
 		BookListView.adapter = BooksAdapter(BookList)
 		BookListView.layoutManager = LinearLayoutManager(this)
 
