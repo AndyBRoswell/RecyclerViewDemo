@@ -7,10 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 
 open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<BooksAdapter.BookViewHolder>() {
-	open inner class BookViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView), View.OnCreateContextMenuListener/*, MenuItem.OnMenuItemClickListener*/ {
+	open inner class BookViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView), View.OnCreateContextMenuListener {
 		val BookCoverView: ImageView = ItemView.findViewById(R.id.image_view_book_cover)
 		val BookTitleView: TextView = ItemView.findViewById(R.id.text_view_book_title)
 
@@ -52,6 +53,11 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 	}
 
 	override fun getItemCount() = BookList.size
+
+	fun ModifyBookItem(Pos: Int, @DrawableRes CoverResourceID: Int = 0, Title: String? = null) {
+		if (Title != null) BookList[Pos].Title = Title
+		notifyItemChanged(Pos)
+	}
 
 	fun DeleteBookItem(Pos: Int) {
 		BookList.removeAt(Pos)
