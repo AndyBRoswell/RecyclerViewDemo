@@ -7,7 +7,7 @@ import android.view.View
 import top.abr.androidexp6.databinding.ActivityEditBookBinding
 
 class EditBookActivity : AppCompatActivity() {
-	open inner class EditBookEventHandler {
+	open inner class EditBookEventHandlers {
 		fun OnClickButtonOK(V: View) {
 
 		}
@@ -25,6 +25,8 @@ class EditBookActivity : AppCompatActivity() {
 
 		ActivityEditBook = ActivityEditBookBinding.inflate(layoutInflater)
 		setContentView(ActivityEditBook.root)
+
+		ActivityEditBook.handlers = EditBookEventHandlers()
 
 		ActivityEditBook.editBookTitle.setText(intent.getStringExtra("Book.Title"))
 	}

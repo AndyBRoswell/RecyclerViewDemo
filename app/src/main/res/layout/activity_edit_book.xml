@@ -3,7 +3,7 @@
 	<data>
 		<variable
 			name="Handlers"
-			type="top.abr.androidexp6.EditBookActivity.EditBookEventHandler" />
+			type="top.abr.androidexp6.EditBookActivity.EditBookEventHandlers" />
 	</data>
 
 	<LinearLayout
