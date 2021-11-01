@@ -57,11 +57,14 @@ class BookListMainActivity : AppCompatActivity() {
 	}
 
 	override fun onContextItemSelected(MItem: MenuItem): Boolean {
-		when (MItem.itemId) {
-			0 -> {
+		when (MItem.title) {
+			"新建" -> {
+				EditBookActivityLauncher.launch(Book())
+			}
+			"编辑" -> {
 				EditBookActivityLauncher.launch(MainBooksAdapter.BookList[MainBooksAdapter.MPosition])
 			}
-			1 -> {
+			"删除" -> {
 				MainBooksAdapter.DeleteBookItem(MainBooksAdapter.MPosition)
 			}
 		}

@@ -25,7 +25,7 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 		}
 
 		override fun onCreateContextMenu(M: ContextMenu?, V: View?, MenuInfo: ContextMenu.ContextMenuInfo?) {
-			val MenuItemHeaders = arrayOf("编辑", "删除")
+			val MenuItemHeaders = arrayOf("新建", "编辑", "删除")
 			for (i in MenuItemHeaders.indices) {
 				M!!.add(Menu.NONE, i, i, MenuItemHeaders[i])
 			}
