@@ -31,7 +31,7 @@ class EditBookActivity : AppCompatActivity() {
 		ActivityEditBook = ActivityEditBookBinding.inflate(layoutInflater)
 		setContentView(ActivityEditBook.root)
 
-		ActivityEditBook.handlers = EditBookEventHandlers()
+		ActivityEditBook.handlers = EditBookEventHandlers() // DO NOT FORGET THIS.
 
 		ActivityEditBook.editBookTitle.setText(intent.getStringExtra("Book.Title"))
 	}
