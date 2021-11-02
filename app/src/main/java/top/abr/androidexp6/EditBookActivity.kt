@@ -17,7 +17,7 @@ class EditBookActivity : AppCompatActivity() {
 			}
 			setResult(Activity.RESULT_OK, IntentWithResult)
 			Toast.makeText(this@EditBookActivity, "<EditBookActivity>" + ActivityEditBook.editBookTitle.text.toString(), Toast.LENGTH_SHORT).show()
-			Toast.makeText(this@EditBookActivity, """<EditBookActivity>IntentWithResult."Book.Title" = """ + , Toast.LENGTH_SHORT).show()
+			Toast.makeText(this@EditBookActivity, """<EditBookActivity>IntentWithResult."Book.Title" = """ + IntentWithResult.getStringExtra("Book.Title"), Toast.LENGTH_SHORT).show()
 			finish()
 		}
 
