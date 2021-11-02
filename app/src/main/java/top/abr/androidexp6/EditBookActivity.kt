@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import top.abr.androidexp6.databinding.ActivityEditBookBinding
 
 class EditBookActivity : AppCompatActivity() {
@@ -15,6 +16,8 @@ class EditBookActivity : AppCompatActivity() {
 				putExtras(intent.extras!!)
 			}
 			setResult(Activity.RESULT_OK, IntentWithResult)
+			Toast.makeText(this@EditBookActivity, "<EditBookActivity>" + ActivityEditBook.editBookTitle.text.toString(), Toast.LENGTH_SHORT).show()
+			Toast.makeText(this@EditBookActivity, """<EditBookActivity>IntentWithResult."Book.Title" = """ + , Toast.LENGTH_SHORT).show()
 			finish()
 		}
 

@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,7 @@ class BookListMainActivity : AppCompatActivity() {
 
 		override fun parseResult(ResultCode: Int, IntentWithResult: Intent?): Pair<Book, Bundle>? {
 			if (ResultCode != Activity.RESULT_OK) return null
+			Toast.makeText(this@BookListMainActivity, "<BookListMainActivity>" + IntentWithResult?.getStringExtra("Book.Title")!!, Toast.LENGTH_SHORT).show()
 			return Pair(Book(Title = IntentWithResult?.getStringExtra("Book.Title")!!), IntentWithResult.extras!!)
 		}
 	}
