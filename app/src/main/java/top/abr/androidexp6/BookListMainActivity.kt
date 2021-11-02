@@ -6,7 +6,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,12 +17,12 @@ class BookListMainActivity : AppCompatActivity() {
 		override fun createIntent(AppContext: Context, Inputs: Pair<Book, Bundle>) =
 			Intent(this@BookListMainActivity, EditBookActivity::class.java).apply {
 				putExtra("Book.Title", Inputs.first.Title)
-				putExtras(Inputs.second)
+				putExtra("EditParam", Inputs.second)
 			}
 
 		override fun parseResult(ResultCode: Int, IntentWithResult: Intent?): Pair<Book, Bundle>? {
 			if (ResultCode != Activity.RESULT_OK) return null
-			return Pair(Book(Title = IntentWithResult?.getStringExtra("Book.Title")!!), IntentWithResult.extras!!)
+			return Pair(Book(Title = IntentWithResult?.getStringExtra("Book.Title")!!), IntentWithResult.getBundleExtra("EditParam")!!)
 		}
 	}
 

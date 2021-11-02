@@ -5,14 +5,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import top.abr.androidexp6.databinding.ActivityEditBookBinding
 
 class EditBookActivity : AppCompatActivity() {
 	open inner class EditBookEventHandlers {
 		fun OnClickButtonOK(V: View) {
 			val IntentWithResult = Intent().apply {
-				putExtras(intent.extras!!)
+				putExtra("EditParam", intent.getBundleExtra("EditParam"))
 				putExtra("Book.Title", ActivityEditBook.editBookTitle.text.toString()) // This statement MUST be put after the last statement. Or the string indexed by "Book.Title" will be overwritten.
 			}
 			setResult(Activity.RESULT_OK, IntentWithResult)
