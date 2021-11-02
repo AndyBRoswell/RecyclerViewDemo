@@ -25,8 +25,8 @@ class EditBookActivity : AppCompatActivity() {
 
 	lateinit var ActivityEditBook: ActivityEditBookBinding
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
+	override fun onCreate(SavedInstanceState: Bundle?) {
+		super.onCreate(SavedInstanceState)
 
 		ActivityEditBook = ActivityEditBookBinding.inflate(layoutInflater)
 		setContentView(ActivityEditBook.root)
