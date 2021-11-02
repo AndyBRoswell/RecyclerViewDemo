@@ -13,15 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import top.abr.androidexp6.databinding.ActivityMainBinding
 
 class BookListMainActivity : AppCompatActivity() {
-	open inner class EditBookInformation : ActivityResultContract<Book, Book>() {
-		override fun createIntent(AppContext: Context, BookForEdit: Book) =
+	open inner class EditBookInformation : ActivityResultContract<Pair<Book, Bundle>, Pair<Book, Bundle>>() {
+		override fun createIntent(AppContext: Context, Inputs: Pair<Book, Bundle>) =
 			Intent(this@BookListMainActivity, EditBookActivity::class.java).apply {
-				putExtra("Book.Title", BookForEdit.Title)
+				putExtra("Book.Title", Inputs.first.Title)
+				putExtras(Inputs.second)
 			}
 
-		override fun parseResult(ResultCode: Int, IntentWithResult: Intent?): Book? {
+		override fun parseResult(ResultCode: Int, IntentWithResult: Intent?): Pair<Book, Bundle>? {
 			if (ResultCode != Activity.RESULT_OK) return null
-			return Book(Title = IntentWithResult?.getStringExtra("Book.Title")!!)
+			return Pair(Book(Title = IntentWithResult?.getStringExtra("Book.Title")!!), IntentWithResult.extras!!)
 		}
 	}
 
@@ -36,7 +37,7 @@ class BookListMainActivity : AppCompatActivity() {
 	lateinit var ActivityMain: ActivityMainBinding
 	lateinit var BookListView: RecyclerView
 	lateinit var MainBooksAdapter: BooksAdapter
-	lateinit var EditBookActivityLauncher: ActivityResultLauncher<Book>
+	lateinit var EditBookActivityLauncher: ActivityResultLauncher<Pair<Book, Bundle>>
 
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
@@ -52,17 +53,25 @@ class BookListMainActivity : AppCompatActivity() {
 
 		MainBooksAdapter = BookListView.adapter as BooksAdapter
 		EditBookActivityLauncher = registerForActivityResult(EditBookInformation()) {
-			if (it != null) MainBooksAdapter.ModifyBookItem(MainBooksAdapter.MPosition, Title = it.Title)
+			if (it != null)
+				when (it.second.getString("Mode")) {
+					"New" -> MainBooksAdapter.AddBookItem(Book(R.drawable.book_no_name, it.first.Title))
+					"Edit" -> MainBooksAdapter.ModifyBookItem(MainBooksAdapter.MPosition, Title = it.first.Title)
+				}
 		}
 	}
 
 	override fun onContextItemSelected(MItem: MenuItem): Boolean {
 		when (MItem.title) {
 			"新建" -> {
-				EditBookActivityLauncher.launch(Book())
+				val EditParam = Bundle()
+				EditParam.putString("Mode", "New")
+				EditBookActivityLauncher.launch(Pair(Book(), EditParam))
 			}
 			"编辑" -> {
-				EditBookActivityLauncher.launch(MainBooksAdapter.BookList[MainBooksAdapter.MPosition])
+				val EditParam = Bundle()
+				EditParam.putString("Mode", "Edit")
+				EditBookActivityLauncher.launch(Pair(MainBooksAdapter.BookList[MainBooksAdapter.MPosition], EditParam))
 			}
 			"删除" -> {
 				MainBooksAdapter.DeleteBookItem(MainBooksAdapter.MPosition)

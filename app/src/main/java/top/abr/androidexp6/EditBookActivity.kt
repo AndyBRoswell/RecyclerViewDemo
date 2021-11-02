@@ -12,6 +12,7 @@ class EditBookActivity : AppCompatActivity() {
 		fun OnClickButtonOK(V: View) {
 			val IntentWithResult = Intent().apply {
 				putExtra("Book.Title", ActivityEditBook.editBookTitle.text.toString())
+				putExtras(intent.extras!!)
 			}
 			setResult(Activity.RESULT_OK, IntentWithResult)
 			finish()

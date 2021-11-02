@@ -54,6 +54,11 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 
 	override fun getItemCount() = BookList.size
 
+	fun AddBookItem(B: Book) {
+		BookList.add(B)
+		notifyItemInserted(BookList.size - 1)
+	}
+
 	fun ModifyBookItem(Pos: Int, @DrawableRes CoverResourceID: Int = 0, Title: String? = null) {
 		if (Title != null) BookList[Pos].Title = Title
 		notifyItemChanged(Pos)
