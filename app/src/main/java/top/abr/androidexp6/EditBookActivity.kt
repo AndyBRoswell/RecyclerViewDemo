@@ -19,8 +19,7 @@ class EditBookActivity : AppCompatActivity() {
 		}
 
 		fun OnClickButtonCancel(V: View) {
-			setResult(Activity.RESULT_CANCELED)
-			finish()
+			onBackPressed()
 		}
 	}
 
@@ -35,5 +34,10 @@ class EditBookActivity : AppCompatActivity() {
 		ActivityEditBook.handlers = EditBookEventHandlers()
 
 		ActivityEditBook.editBookTitle.setText(intent.getStringExtra("Book.Title"))
+	}
+
+	override fun onBackPressed() {
+		setResult(Activity.RESULT_CANCELED)
+		finish()
 	}
 }
