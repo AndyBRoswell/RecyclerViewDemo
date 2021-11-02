@@ -44,9 +44,7 @@ class BookListMainActivity : AppCompatActivity() {
 
 		ActivityMain = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(ActivityMain.root)
-//		setContentView(R.layout.activity_main)
-
-//		BookListView = findViewById(R.id.recycle_view_books)
+		
 		BookListView = ActivityMain.recycleViewBooks
 		BookListView.adapter = BooksAdapter(BookList)
 		BookListView.layoutManager = LinearLayoutManager(this)
