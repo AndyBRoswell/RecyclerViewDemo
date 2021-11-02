@@ -13,14 +13,11 @@ class EditBookActivity : AppCompatActivity() {
 		fun OnClickButtonOK(V: View) {
 			val IntentWithResult = Intent().apply {
 				putExtra("Book.Title", ActivityEditBook.editBookTitle.text.toString())
-				Toast.makeText(this@EditBookActivity, """<EditBookActivity>IntentWithResult.getStringExtra("Mode") = """ + getStringExtra("Mode"), Toast.LENGTH_SHORT).show()
 				putExtras(intent.extras!!)
 			}
 			setResult(Activity.RESULT_OK, IntentWithResult)
 			Toast.makeText(this@EditBookActivity, "<EditBookActivity>" + ActivityEditBook.editBookTitle.text.toString(), Toast.LENGTH_SHORT).show()
-			Toast.makeText(this@EditBookActivity, """<EditBookActivity>IntentWithResult.extras.getString("Book.Title") = """ + IntentWithResult.extras!!.getString("Book.Title"), Toast.LENGTH_SHORT).show()
 			Toast.makeText(this@EditBookActivity, """<EditBookActivity>IntentWithResult.getStringExtra("Book.Title") = """ + IntentWithResult.getStringExtra("Book.Title"), Toast.LENGTH_SHORT).show()
-			Toast.makeText(this@EditBookActivity, """<EditBookActivity>IntentWithResult.getStringExtra("Mode") = """ + IntentWithResult.getStringExtra("Mode"), Toast.LENGTH_SHORT).show()
 			finish()
 		}
 
