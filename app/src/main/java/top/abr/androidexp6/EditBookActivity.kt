@@ -13,11 +13,9 @@ class EditBookActivity : AppCompatActivity() {
 		fun OnClickButtonOK(V: View) {
 			val IntentWithResult = Intent().apply {
 				putExtras(intent.extras!!)
-				putExtra("Book.Title", ActivityEditBook.editBookTitle.text.toString())
+				putExtra("Book.Title", ActivityEditBook.editBookTitle.text.toString()) // This statement MUST be put after the last statement. Or the string indexed by "Book.Title" will be overwritten.
 			}
 			setResult(Activity.RESULT_OK, IntentWithResult)
-			Toast.makeText(this@EditBookActivity, "<EditBookActivity>" + ActivityEditBook.editBookTitle.text.toString(), Toast.LENGTH_SHORT).show()
-			Toast.makeText(this@EditBookActivity, """<EditBookActivity>IntentWithResult.getStringExtra("Book.Title") = """ + IntentWithResult.getStringExtra("Book.Title"), Toast.LENGTH_SHORT).show()
 			finish()
 		}
 
