@@ -12,8 +12,8 @@ class EditBookActivity : AppCompatActivity() {
 	open inner class EditBookEventHandlers {
 		fun OnClickButtonOK(V: View) {
 			val IntentWithResult = Intent().apply {
-				putExtra("Book.Title", ActivityEditBook.editBookTitle.text.toString())
 				putExtras(intent.extras!!)
+				putExtra("Book.Title", ActivityEditBook.editBookTitle.text.toString())
 			}
 			setResult(Activity.RESULT_OK, IntentWithResult)
 			Toast.makeText(this@EditBookActivity, "<EditBookActivity>" + ActivityEditBook.editBookTitle.text.toString(), Toast.LENGTH_SHORT).show()
