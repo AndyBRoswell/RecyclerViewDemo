@@ -4,12 +4,11 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.annotation.Size
 import androidx.recyclerview.widget.RecyclerView
 
 typealias BookListType = ArrayList<Book>
 
-open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<BooksAdapter.BookViewHolder>() {
+open class BooksAdapter(var BookList: ArrayList<Book> = ArrayList()) : RecyclerView.Adapter<BooksAdapter.BookViewHolder>() {
 	open inner class BookViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView), View.OnCreateContextMenuListener {
 		val BookCoverView: ImageView = ItemView.findViewById(R.id.image_view_book_cover)
 		val BookTitleView: TextView = ItemView.findViewById(R.id.text_view_book_title)

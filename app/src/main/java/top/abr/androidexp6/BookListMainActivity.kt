@@ -40,14 +40,6 @@ class BookListMainActivity : AppCompatActivity() {
 		}
 	}
 
-	val BookList = BookListType(
-//		arrayListOf(
-//			Book(R.drawable.book_2, "软件项目管理案例教程（第4版）"),
-//			Book(R.drawable.book_no_name, "创新工程实践"),
-//			Book(R.drawable.book_1, "信息安全数学基础（第2版）")
-//		)
-	)
-
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
 
@@ -60,7 +52,7 @@ class BookListMainActivity : AppCompatActivity() {
 		setContentView(ActivityMain.root)
 
 		BookListView = ActivityMain.recycleViewBooks
-		BookListView.adapter = BooksAdapter(BookList)
+		BookListView.adapter = BooksAdapter()
 		BookListView.layoutManager = LinearLayoutManager(this)
 
 		MainBooksAdapter = BookListView.adapter as BooksAdapter
