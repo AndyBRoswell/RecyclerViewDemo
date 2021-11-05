@@ -4,6 +4,7 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.Size
 import androidx.recyclerview.widget.RecyclerView
 
 typealias BookListType = ArrayList<Book>
@@ -68,7 +69,8 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 	}
 
 	fun ClearBookList() {
+		val Size = BookList.size
 		BookList.clear()
-		notifyItemChanged(0)
+		notifyItemRangeRemoved(0, Size)
 	}
 }
