@@ -67,6 +67,13 @@ class BookListMainActivity : AppCompatActivity() {
 		return true
 	}
 
+	override fun onOptionsItemSelected(MItem: MenuItem): Boolean {
+		when (MItem.itemId) {
+
+		}
+		return true
+	}
+
 	override fun onContextItemSelected(MItem: MenuItem): Boolean {
 		when (MItem.title) {
 			"新建" -> {
