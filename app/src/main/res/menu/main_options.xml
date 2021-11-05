@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<group android:id="@+id/MainOptionsReadList">
+		<item
+			android:id="@+id/MainOptionsReadInternally"
+			android:title="从内部默认位置读取列表" />
+		<item
+			android:id="@+id/MainOptionsReadExternally"
+			android:title="从TF卡默认位置读取列表" />
+		<item
+			android:id="@+id/MainOptionsReadInCustomDir"
+			android:title="从自定义目录读取列表" />
+	</group>
+	<group android:id="@+id/MainOptionsSaveList">
+		<item
+			android:id="@+id/MainOptionsSaveInternally"
+			android:title="保存列表到内部默认位置" />
+		<item
+			android:id="@+id/MainOptionsSaveExternally"
+			android:title="保存列表到TF卡默认位置" />
+		<item
+			android:id="@+id/MainOptionsSaveInCustomDir"
+			android:title="保存列表到自定义目录" />
+	</group>
+</menu>

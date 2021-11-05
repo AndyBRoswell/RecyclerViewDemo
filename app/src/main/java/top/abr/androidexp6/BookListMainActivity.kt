@@ -5,9 +5,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.core.view.MenuCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import top.abr.androidexp6.databinding.ActivityMainBinding
@@ -57,6 +59,12 @@ class BookListMainActivity : AppCompatActivity() {
 					"Edit" -> MainBooksAdapter.ModifyBookItem(MainBooksAdapter.MPosition, Title = it.first.Title)
 				}
 		}
+	}
+
+	override fun onCreateOptionsMenu(M: Menu?): Boolean {
+		menuInflater.inflate(R.menu.main_options, M)
+		MenuCompat.setGroupDividerEnabled(M, true)
+		return true
 	}
 
 	override fun onContextItemSelected(MItem: MenuItem): Boolean {
