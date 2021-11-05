@@ -6,6 +6,8 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 
+typealias BookListType = ArrayList<Book>
+
 open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<BooksAdapter.BookViewHolder>() {
 	open inner class BookViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView), View.OnCreateContextMenuListener {
 		val BookCoverView: ImageView = ItemView.findViewById(R.id.image_view_book_cover)
