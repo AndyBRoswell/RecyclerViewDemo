@@ -66,4 +66,9 @@ open class BooksAdapter(var BookList: ArrayList<Book>) : RecyclerView.Adapter<Bo
 		BookList.removeAt(Pos)
 		notifyItemRemoved(Pos)
 	}
+
+	fun ClearBookList() {
+		BookList.clear()
+		notifyItemChanged(0)
+	}
 }

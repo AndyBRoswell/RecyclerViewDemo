@@ -4,25 +4,27 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.lang.NullPointerException
 
 open class StorageAccessor {
 	companion object {
-		fun ReadBookList(A: BooksAdapter, SerializedFile: String = "BookList.txt") {
+		fun ReadBookList(A: BooksAdapter, SerializedFile: String) {
 			val BookListIStream = ObjectInputStream(FileInputStream(SerializedFile))
 			A.BookList.clear()
 			var B: Book
-			var HasNext = true
-			while (HasNext) {
-				B = BookListIStream.readObject() as Book
-				if (B != null) A.BookList.add(B)
-				else HasNext = false
+			while (true) {
+				try {
+					B = BookListIStream.readObject() as Book
+					A.BookList.add(B)
+				}
+				catch (E: NullPointerException) { break; }
 			}
 			BookListIStream.close()
 			A.notifyItemChanged(0)
 		}
 
-		fun SaveBookList(A: BooksAdapter, SerializedFile: String = "BookList.txt") {
-			val BookListOStream = ObjectOutputStream(FileOutputStream(SerializedFile))
+		fun SaveBookList(A: BooksAdapter, TargetedFile: String) {
+			val BookListOStream = ObjectOutputStream(FileOutputStream(TargetedFile))
 			for (B in A.BookList) {
 				BookListOStream.writeObject(B)
 			}

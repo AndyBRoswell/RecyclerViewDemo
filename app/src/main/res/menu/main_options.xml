@@ -10,6 +10,9 @@
 		<item
 			android:id="@+id/MainOptionsReadInCustomDir"
 			android:title="从自定义目录读取列表" />
+		<item
+			android:id="@+id/MainOptionsClearBookList"
+			android:title="清空书目列表" />
 	</group>
 	<group android:id="@+id/MainOptionsSaveList">
 		<item

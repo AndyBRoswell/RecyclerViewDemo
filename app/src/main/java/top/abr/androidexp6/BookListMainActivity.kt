@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.view.MenuCompat
@@ -15,6 +17,16 @@ import androidx.recyclerview.widget.RecyclerView
 import top.abr.androidexp6.databinding.ActivityMainBinding
 
 class BookListMainActivity : AppCompatActivity() {
+	lateinit var ActivityMain: ActivityMainBinding
+	lateinit var BookListView: RecyclerView
+	lateinit var MainBooksAdapter: BooksAdapter
+	lateinit var EditBookActivityLauncher: ActivityResultLauncher<Pair<Book, Bundle>>
+
+	lateinit var InternalFilesDir: String
+	lateinit var ExternalFilesDir: String
+	lateinit var DefaultInternalBookListFile: String
+	lateinit var DefaultExternalBookListFile: String
+
 	open inner class EditBookInformation : ActivityResultContract<Pair<Book, Bundle>, Pair<Book, Bundle>>() {
 		override fun createIntent(AppContext: Context, Inputs: Pair<Book, Bundle>) =
 			Intent(this@BookListMainActivity, EditBookActivity::class.java).apply {
@@ -29,24 +41,24 @@ class BookListMainActivity : AppCompatActivity() {
 	}
 
 	val BookList = BookListType(
-		arrayListOf(
-			Book(R.drawable.book_2, "软件项目管理案例教程（第4版）"),
-			Book(R.drawable.book_no_name, "创新工程实践"),
-			Book(R.drawable.book_1, "信息安全数学基础（第2版）")
-		)
+//		arrayListOf(
+//			Book(R.drawable.book_2, "软件项目管理案例教程（第4版）"),
+//			Book(R.drawable.book_no_name, "创新工程实践"),
+//			Book(R.drawable.book_1, "信息安全数学基础（第2版）")
+//		)
 	)
-
-	lateinit var ActivityMain: ActivityMainBinding
-	lateinit var BookListView: RecyclerView
-	lateinit var MainBooksAdapter: BooksAdapter
-	lateinit var EditBookActivityLauncher: ActivityResultLauncher<Pair<Book, Bundle>>
 
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
 
+		InternalFilesDir = applicationContext.filesDir.toString()
+		DefaultInternalBookListFile = "$InternalFilesDir/BookList.txt"
+		ExternalFilesDir = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) applicationContext.getExternalFilesDir(null).toString() else ""
+		DefaultExternalBookListFile = if (ExternalFilesDir != "") "$ExternalFilesDir/BookList.txt" else ""
+
 		ActivityMain = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(ActivityMain.root)
-		
+
 		BookListView = ActivityMain.recycleViewBooks
 		BookListView.adapter = BooksAdapter(BookList)
 		BookListView.layoutManager = LinearLayoutManager(this)
@@ -69,8 +81,13 @@ class BookListMainActivity : AppCompatActivity() {
 
 	override fun onOptionsItemSelected(MItem: MenuItem): Boolean {
 		when (MItem.itemId) {
-
+			R.id.MainOptionsReadInternally -> StorageAccessor.ReadBookList(MainBooksAdapter, DefaultInternalBookListFile)
+			R.id.MainOptionsReadExternally -> if (DefaultExternalBookListFile != "") StorageAccessor.ReadBookList(MainBooksAdapter, DefaultExternalBookListFile)
+			R.id.MainOptionsClearBookList -> MainBooksAdapter.ClearBookList()
+			R.id.MainOptionsSaveInternally -> StorageAccessor.SaveBookList(MainBooksAdapter, DefaultInternalBookListFile)
+			R.id.MainOptionsSaveExternally -> if (DefaultExternalBookListFile != "") StorageAccessor.SaveBookList(MainBooksAdapter, DefaultExternalBookListFile)
 		}
+		Toast.makeText(this, MItem.title.toString() + "  成功", Toast.LENGTH_SHORT).show()
 		return true
 	}
 
