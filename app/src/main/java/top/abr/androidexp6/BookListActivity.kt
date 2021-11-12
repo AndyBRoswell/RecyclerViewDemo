@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import top.abr.androidexp6.databinding.ActivityBookListBinding
 
 class BookListActivity : AppCompatActivity() {
-	lateinit var ActivityBook: ActivityBookListBinding
+	lateinit var ActivityBookList: ActivityBookListBinding
 	lateinit var BookListView: RecyclerView
 	lateinit var MainBooksAdapter: BooksAdapter
 	lateinit var EditBookActivityLauncher: ActivityResultLauncher<Pair<Book, Bundle>>
@@ -48,10 +48,10 @@ class BookListActivity : AppCompatActivity() {
 		ExternalFilesDir = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) applicationContext.getExternalFilesDir(null).toString() else ""
 		DefaultExternalBookListFile = if (ExternalFilesDir != "") "$ExternalFilesDir/BookList.txt" else ""
 
-		ActivityBook = ActivityBookListBinding.inflate(layoutInflater)
-		setContentView(ActivityBook.root)
+		ActivityBookList = ActivityBookListBinding.inflate(layoutInflater)
+		setContentView(ActivityBookList.root)
 
-		BookListView = ActivityBook.recycleViewBooks
+		BookListView = ActivityBookList.recycleViewBooks
 		BookListView.adapter = BooksAdapter()
 		BookListView.layoutManager = LinearLayoutManager(this)
 
@@ -66,7 +66,7 @@ class BookListActivity : AppCompatActivity() {
 	}
 
 	override fun onCreateOptionsMenu(M: Menu?): Boolean {
-		menuInflater.inflate(R.menu.main_options, M)
+		menuInflater.inflate(R.menu.book_list_options, M)
 		MenuCompat.setGroupDividerEnabled(M, true)
 		return true
 	}
