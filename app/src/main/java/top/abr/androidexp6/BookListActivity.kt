@@ -14,10 +14,10 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.view.MenuCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import top.abr.androidexp6.databinding.ActivityBookBinding
+import top.abr.androidexp6.databinding.ActivityBookListBinding
 
 class BookListActivity : AppCompatActivity() {
-	lateinit var ActivityBook: ActivityBookBinding
+	lateinit var ActivityBook: ActivityBookListBinding
 	lateinit var BookListView: RecyclerView
 	lateinit var MainBooksAdapter: BooksAdapter
 	lateinit var EditBookActivityLauncher: ActivityResultLauncher<Pair<Book, Bundle>>
@@ -48,7 +48,7 @@ class BookListActivity : AppCompatActivity() {
 		ExternalFilesDir = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) applicationContext.getExternalFilesDir(null).toString() else ""
 		DefaultExternalBookListFile = if (ExternalFilesDir != "") "$ExternalFilesDir/BookList.txt" else ""
 
-		ActivityBook = ActivityBookBinding.inflate(layoutInflater)
+		ActivityBook = ActivityBookListBinding.inflate(layoutInflater)
 		setContentView(ActivityBook.root)
 
 		BookListView = ActivityBook.recycleViewBooks
