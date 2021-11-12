@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.os.bundleOf
 import androidx.core.view.MenuCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,7 +45,7 @@ class BookListFragment : Fragment() {
 
 		InternalFilesDir = activity?.applicationContext?.filesDir.toString()
 		DefaultInternalBookListFile = "$InternalFilesDir/BookList.txt"
-		ExternalFilesDir = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) activity.applicationContext.getExternalFilesDir(null).toString() else ""
+		ExternalFilesDir = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) activity?.applicationContext?.getExternalFilesDir(null).toString() else ""
 		DefaultExternalBookListFile = if (ExternalFilesDir != "") "$ExternalFilesDir/BookList.txt" else ""
 
 		FragmentBookList = ActivityBookListBinding.inflate(layoutInflater)
@@ -55,8 +56,15 @@ class BookListFragment : Fragment() {
 		BookListView.layoutManager = LinearLayoutManager(this.activity)
 
 		MainBooksAdapter = BookListView.adapter as BooksAdapter
-		activity?.supportFragmentManager?.setFragmentResultListener("EditBookResult") { requestKey, bundle ->
-
+		activity?.supportFragmentManager?.setFragmentResultListener("EditBookResult", this) { _, ResultBundle ->
+			if (ResultBundle.size() != 0) {
+				val BookInformation = ResultBundle.getBundle("Book")!!
+				val EditParam = ResultBundle.getBundle("EditParam")!!
+				when (EditParam.getString("Mode")) {
+					"New" -> MainBooksAdapter.AddBookItem(Book(R.drawable.book_no_name, BookInformation.getString("Title")!!))
+					"Edit" -> MainBooksAdapter.ModifyBookItem(MainBooksAdapter.MPosition, Title = BookInformation.getString("Title"))
+				}
+			}
 		}
 	}
 
@@ -83,8 +91,10 @@ class BookListFragment : Fragment() {
 	}
 
 	fun LaunchEditBookFragment(B: Book, EditParam: Bundle?) {
+		val BookInformation = bundleOf("Title" to B.Title)
+		val Params: Bundle = bundleOf("Book" to BookInformation, "EditParam" to EditParam)
 		activity?.supportFragmentManager?.beginTransaction()?.apply {
-			replace(((view as ViewGroup).parent as View).id, EditBookFragment.newInstance("", ""))
+			replace(((view as ViewGroup).parent as View).id, EditBookFragment.newInstance(Params))
 			addToBackStack(null)
 			commit()
 		}
