@@ -31,7 +31,7 @@ class MainActivity : FragmentActivity() {
 		super.onCreate(savedInstanceState)
 		ActivityMain = ActivityMainBinding.inflate(layoutInflater)
 		Tabs = ActivityMain.Tabs
-		TabViewer = ActivityMain.Home
+		TabViewer = ActivityMain.TabViewer
 		setContentView(ActivityMain.root)
 
 		TabViewer.adapter = PageAdapter(this)
