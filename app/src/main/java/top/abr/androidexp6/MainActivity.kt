@@ -11,15 +11,11 @@ class MainActivity : FragmentActivity() {
 	open inner class PageAdapter(F: FragmentActivity) : FragmentStateAdapter(F) {
 		override fun getItemCount(): Int = HOME_TAB_COUNT
 
-		override fun createFragment(Pos: Int): Fragment {
+		override fun createFragment(Pos: Int): Fragment =
 			when (Pos) {
-				0 -> {
-				}
-				else -> {
-
-				}
+				0 -> BookListFragment()
+				else -> Fragment()
 			}
-		}
 	}
 
 	val HOME_TAB_COUNT = 3
@@ -31,5 +27,8 @@ class MainActivity : FragmentActivity() {
 		super.onCreate(savedInstanceState)
 		ActivityMain = ActivityMainBinding.inflate(layoutInflater)
 		Home = ActivityMain.Home
+		setContentView(ActivityMain.root)
+
+		Home.adapter = PageAdapter(this)
 	}
 }
