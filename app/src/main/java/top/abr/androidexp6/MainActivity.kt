@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentActivity
 import android.os.Bundle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import top.abr.androidexp6.databinding.ActivityMainBinding
 
 class MainActivity : FragmentActivity() {
@@ -19,16 +21,23 @@ class MainActivity : FragmentActivity() {
 	}
 
 	val HOME_TAB_COUNT = 3
+	val TabTitle = arrayOf("图书", "新闻", "卖家")
 
-	private lateinit var ActivityMain: ActivityMainBinding
-	private lateinit var Home: ViewPager2
+	lateinit var ActivityMain: ActivityMainBinding
+	lateinit var Tabs : TabLayout
+	lateinit var TabViewer: ViewPager2
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		ActivityMain = ActivityMainBinding.inflate(layoutInflater)
-		Home = ActivityMain.Home
+		Tabs = ActivityMain.Tabs
+		TabViewer = ActivityMain.Home
 		setContentView(ActivityMain.root)
 
-		Home.adapter = PageAdapter(this)
+		TabViewer.adapter = PageAdapter(this)
+
+		TabLayoutMediator(Tabs, TabViewer) { CurrentTab, CurrentPos ->
+			CurrentTab.text = TabTitle[CurrentPos]
+		}.attach()
 	}
 }
