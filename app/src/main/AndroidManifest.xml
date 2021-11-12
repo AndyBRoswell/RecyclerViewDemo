@@ -13,7 +13,7 @@
 			android:name=".EditBookActivity"
 			android:exported="false" />
 		<activity
-			android:name=".BookListMainActivity"
+			android:name=".BookListActivity"
 			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
