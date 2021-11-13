@@ -26,18 +26,18 @@ class MainActivity : AppCompatActivity() {
 
 	lateinit var ActivityMain: ActivityMainBinding
 	lateinit var Tabs : TabLayout
-	lateinit var TabViewer: ViewPager2
+	lateinit var TabDisplayer: ViewPager2
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		ActivityMain = ActivityMainBinding.inflate(layoutInflater)
 		Tabs = ActivityMain.Tabs
-		TabViewer = ActivityMain.TabViewer
+		TabDisplayer = ActivityMain.TabViewer
 		setContentView(ActivityMain.root)
 
-		TabViewer.adapter = PageAdapter(this)
+		TabDisplayer.adapter = PageAdapter(this)
 
-		TabLayoutMediator(Tabs, TabViewer) { CurrentTab, CurrentPos ->
+		TabLayoutMediator(Tabs, TabDisplayer) { CurrentTab, CurrentPos ->
 			CurrentTab.text = TabTitle[CurrentPos]
 		}.attach()
 	}
