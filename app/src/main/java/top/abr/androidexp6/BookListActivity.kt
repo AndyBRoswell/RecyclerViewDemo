@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.core.os.bundleOf
 import androidx.core.view.MenuCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,13 +31,15 @@ class BookListActivity : AppCompatActivity() {
 	open inner class EditBookInformation : ActivityResultContract<Pair<Book, Bundle>, Pair<Book, Bundle>>() {
 		override fun createIntent(AppContext: Context, Inputs: Pair<Book, Bundle>) =
 			Intent(this@BookListActivity, EditBookActivity::class.java).apply {
-				putExtra("Book.Title", Inputs.first.Title)
+				val BookInformation = bundleOf("Title" to Inputs.first.Title)
+				putExtra("Book", BookInformation)
 				putExtra("EditParam", Inputs.second)
 			}
 
 		override fun parseResult(ResultCode: Int, IntentWithResult: Intent?): Pair<Book, Bundle>? {
 			if (ResultCode != Activity.RESULT_OK) return null
-			return Pair(Book(Title = IntentWithResult?.getStringExtra("Book.Title")!!), IntentWithResult.getBundleExtra("EditParam")!!)
+			val BookInformation = IntentWithResult!!.getBundleExtra("Book")!!
+			return Pair(Book(Title = BookInformation.getString("Title")!!), IntentWithResult.getBundleExtra("EditParam")!!)
 		}
 	}
 

@@ -18,8 +18,7 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [BookListFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Use the [BookListFragment.newInstance] factory method to create an instance of this fragment.
  */
 class BookListFragment : Fragment() {
 	// TODO: Rename and change types of parameters
@@ -68,7 +67,7 @@ class BookListFragment : Fragment() {
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		// Inflate the layout for this fragment
+		// Inflate the layout for this fragment (corresponding to setContentView in onCreate method of an Activity)
 		return inflater.inflate(R.layout.activity_book_list, container, false)
 	}
 
@@ -120,8 +119,7 @@ class BookListFragment : Fragment() {
 
 	companion object {
 		/**
-		 * Use this factory method to create a new instance of
-		 * this fragment using the provided parameters.
+		 * Use this factory method to create a new instance of this fragment using the provided parameters.
 		 *
 		 * @param param1 Parameter 1.
 		 * @param param2 Parameter 2.

@@ -10,8 +10,7 @@ import top.abr.androidexp6.databinding.FragmentEditBookBinding
 
 /**
  * A simple [Fragment] subclass.
- * Use the [EditBookFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Use the [EditBookFragment.newInstance] factory method to create an instance of this fragment.
  */
 class EditBookFragment : Fragment() {
 	open inner class EditBookEventHandlers {
@@ -54,8 +53,7 @@ class EditBookFragment : Fragment() {
 
 	companion object {
 		/**
-		 * Use this factory method to create a new instance of
-		 * this fragment using the provided parameters.
+		 * Use this factory method to create a new instance of this fragment using the provided parameters.
 		 *
 		 * @return A new instance of fragment EditBookFragment.
 		 */
