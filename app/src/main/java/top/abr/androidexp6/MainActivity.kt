@@ -3,13 +3,14 @@ package top.abr.androidexp6
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import top.abr.androidexp6.databinding.ActivityMainBinding
 
-class MainActivity : FragmentActivity() {
+class MainActivity : AppCompatActivity() {
 	open inner class PageAdapter(F: FragmentActivity) : FragmentStateAdapter(F) {
 		override fun getItemCount(): Int = HOME_TAB_COUNT
 
