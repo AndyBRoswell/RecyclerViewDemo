@@ -95,7 +95,7 @@ class BookListFragment : Fragment() {
 	fun LaunchEditBookFragment(B: Book, EditParam: Bundle?) {
 		val BookInformation = bundleOf("Title" to B.Title)
 		val Params: Bundle = bundleOf("Book" to BookInformation, "EditParam" to EditParam)
-		activity?.supportFragmentManager?.beginTransaction()?.apply {
+		parentFragmentManager.beginTransaction().apply {
 			replace(((view as ViewGroup).parent as View).id, EditBookFragment.newInstance(Params))
 			addToBackStack(null)
 			commit()
