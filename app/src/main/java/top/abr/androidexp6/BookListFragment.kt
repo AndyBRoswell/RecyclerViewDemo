@@ -45,13 +45,22 @@ class BookListFragment : Fragment() {
 		DefaultInternalBookListFile = "$InternalFilesDir/BookList.txt"
 		ExternalFilesDir = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) activity?.applicationContext?.getExternalFilesDir(null).toString() else ""
 		DefaultExternalBookListFile = if (ExternalFilesDir != "") "$ExternalFilesDir/BookList.txt" else ""
+	}
+
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		// Inflate the layout for this fragment (corresponding to setContentView in onCreate method of an Activity)
+		return inflater.inflate(R.layout.activity_book_list, container, false)
+	}
+
+	override fun onViewCreated(V: View, SavedInstanceState: Bundle?) {
+		super.onViewCreated(V, SavedInstanceState)
+
+		BookListView = V.findViewById(R.id.recycle_view_books)
+		BookListView.adapter = BooksAdapter()
+		BookListView.layoutManager = LinearLayoutManager(this.activity)
 
 		FragmentBookList = ActivityBookListBinding.inflate(layoutInflater)
 		setHasOptionsMenu(true)
-
-		BookListView = FragmentBookList.recycleViewBooks
-		BookListView.adapter = BooksAdapter()
-		BookListView.layoutManager = LinearLayoutManager(this.activity)
 
 		MainBooksAdapter = BookListView.adapter as BooksAdapter
 		activity?.supportFragmentManager?.setFragmentResultListener("EditBookResult", this) { _, ResultBundle ->
@@ -70,11 +79,6 @@ class BookListFragment : Fragment() {
 //			Book(R.drawable.book_no_name, "创新工程实践"),
 //			Book(R.drawable.book_1, "信息安全数学基础（第2版）")
 //		)
-	}
-
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		// Inflate the layout for this fragment (corresponding to setContentView in onCreate method of an Activity)
-		return inflater.inflate(R.layout.activity_book_list, container, false)
 	}
 
 	override fun onCreateOptionsMenu(M: Menu, I: MenuInflater) {
