@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 		override fun createFragment(Pos: Int): Fragment =
 			when (Pos) {
 				0 -> BookListFragment()
-				else -> Fragment()
+				else -> DemoFragment()
 			}
 	}
 
