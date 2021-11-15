@@ -18,27 +18,22 @@ class MainActivity : AppCompatActivity() {
 
 		private val MTab: MutableList<Fragment> = ArrayList(HOME_TAB_COUNT)
 
-		init {
-//			MTab = ArrayList(TabCount)
-//			MTab = ArrayList(HOME_TAB_COUNT)
-		}
+//		override fun getItemCount(): Int = HOME_TAB_COUNT
+		override fun getItemCount(): Int = MTab.size
 
-		override fun getItemCount(): Int = HOME_TAB_COUNT
-//		override fun getItemCount(): Int = MTab.size
-
-		override fun createFragment(Pos: Int): Fragment =
-			when (Pos) {
-				0 -> BookListFragment()
-				else -> DemoFragment()
-			}
-
-//		override fun createFragment(Pos: Int): Fragment {
-//			MTab[Pos] = when (Pos) {
+//		override fun createFragment(Pos: Int): Fragment =
+//			when (Pos) {
 //				0 -> BookListFragment()
 //				else -> DemoFragment()
 //			}
-//			return MTab[Pos]
-//		}
+
+		override fun createFragment(Pos: Int): Fragment {
+			MTab[Pos] = when (Pos) {
+				0 -> BookListFragment()
+				else -> DemoFragment()
+			}
+			return MTab[Pos]
+		}
 
 		fun ReplaceFragment(Pos: Int) {
 			createFragment(Pos)
