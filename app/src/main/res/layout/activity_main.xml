@@ -8,13 +8,13 @@
 	tools:context=".MainActivity">
 
 	<com.google.android.material.tabs.TabLayout
-		android:id="@+id/Tabs"
+		android:id="@+id/TabSelector"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		app:tabMode="scrollable" />
 
 	<androidx.viewpager2.widget.ViewPager2
-		android:id="@+id/TabViewer"
+		android:id="@+id/TabDisplayer"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent" />
 
