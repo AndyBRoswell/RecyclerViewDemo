@@ -16,16 +16,13 @@ class MainActivity : AppCompatActivity() {
 		private val TabFragmentFactory = FAWithViewPager2.supportFragmentManager.fragmentFactory
 		private val TabFragmentClassLoader = FAWithViewPager2.classLoader
 
-		private val MTab: MutableList<Fragment> = ArrayList(HOME_TAB_COUNT)
+		private val MTab: MutableList<Fragment> = ArrayList()
 
-//		override fun getItemCount(): Int = HOME_TAB_COUNT
+		init {
+			for (i in 0 until TabCount) MTab.add(Fragment())
+		}
+
 		override fun getItemCount(): Int = MTab.size
-
-//		override fun createFragment(Pos: Int): Fragment =
-//			when (Pos) {
-//				0 -> BookListFragment()
-//				else -> DemoFragment()
-//			}
 
 		override fun createFragment(Pos: Int): Fragment {
 			MTab[Pos] = when (Pos) {
