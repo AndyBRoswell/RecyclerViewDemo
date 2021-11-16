@@ -9,40 +9,24 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import top.abr.androidexp6.databinding.ActivityMainBinding
-import java.util.ArrayList
 
-class MainActivity : AppCompatActivity() {
-	open inner class PageAdapter(FAWithViewPager2: FragmentActivity, TabCount: Int) : FragmentStateAdapter(FAWithViewPager2) {
-		private val TabFragmentFactory = FAWithViewPager2.supportFragmentManager.fragmentFactory
-		private val TabFragmentClassLoader = FAWithViewPager2.classLoader
+open class PageAdapter(FAWithViewPager2: FragmentActivity, val TabCount: Int) : FragmentStateAdapter(FAWithViewPager2) {
+	override fun getItemCount(): Int = TabCount
 
-		private val MTab: MutableList<Fragment> = ArrayList()
-
-		init {
-			for (i in 0 until TabCount) MTab.add(Fragment())
-		}
-
-		override fun getItemCount(): Int = MTab.size
-
-		override fun createFragment(Pos: Int): Fragment {
-			MTab[Pos] = when (Pos) {
-				0 -> BookListFragment()
-				else -> DemoFragment()
-			}
-			return MTab[Pos]
-		}
-
-		fun ReplaceFragment(Pos: Int) {
-			createFragment(Pos)
-			notifyItemChanged(Pos)
+	override fun createFragment(Pos: Int): Fragment {
+		return when (Pos) {
+			0 -> BookListFragment()
+			else -> DemoFragment()
 		}
 	}
+}
 
+class MainActivity : AppCompatActivity() {
 	val HOME_TAB_COUNT = 3
 	val TabTitle = arrayOf("图书", "新闻", "卖家")
 
 	lateinit var ActivityMain: ActivityMainBinding
-	lateinit var TabSelector : TabLayout
+	lateinit var TabSelector: TabLayout
 	lateinit var TabDisplayer: ViewPager2
 
 	override fun onCreate(savedInstanceState: Bundle?) {

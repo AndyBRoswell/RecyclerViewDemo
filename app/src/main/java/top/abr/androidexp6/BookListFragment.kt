@@ -1,9 +1,14 @@
 package top.abr.androidexp6
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.view.*
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.fragment.app.Fragment
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuCompat
@@ -28,11 +33,27 @@ class BookListFragment : Fragment() {
 	lateinit var FragmentBookList: ActivityBookListBinding
 	lateinit var BookListView: RecyclerView
 	lateinit var MainBooksAdapter: BooksAdapter
+	lateinit var EditBookActivityLauncher: ActivityResultLauncher<Pair<Book, Bundle>>
 
 	lateinit var InternalFilesDir: String
 	lateinit var ExternalFilesDir: String
 	lateinit var DefaultInternalBookListFile: String
 	lateinit var DefaultExternalBookListFile: String
+
+	open inner class EditBookInformation : ActivityResultContract<Pair<Book, Bundle>, Pair<Book, Bundle>>() {
+		override fun createIntent(AppContext: Context, Inputs: Pair<Book, Bundle>) =
+			Intent(this@BookListFragment.activity, EditBookActivity::class.java).apply {
+				val BookInformation = bundleOf("Title" to Inputs.first.Title)
+				putExtra("Book", BookInformation)
+				putExtra("EditParam", Inputs.second)
+			}
+
+		override fun parseResult(ResultCode: Int, IntentWithResult: Intent?): Pair<Book, Bundle>? {
+			if (ResultCode != Activity.RESULT_OK) return null
+			val BookInformation = IntentWithResult!!.getBundleExtra("Book")!!
+			return Pair(Book(Title = BookInformation.getString("Title")!!), IntentWithResult.getBundleExtra("EditParam")!!)
+		}
+	}
 
 	override fun onCreate(SavedInstanceState: Bundle?) {
 		super.onCreate(SavedInstanceState)
@@ -73,6 +94,13 @@ class BookListFragment : Fragment() {
 				}
 			}
 		}
+		EditBookActivityLauncher = registerForActivityResult(EditBookInformation()) {
+			if (it != null)
+				when (it.second.getString("Mode")) {
+					"New" -> MainBooksAdapter.AddBookItem(Book(R.drawable.book_no_name, it.first.Title))
+					"Edit" -> MainBooksAdapter.ModifyBookItem(MainBooksAdapter.MPosition, Title = it.first.Title)
+				}
+		}
 	}
 
 	override fun onCreateOptionsMenu(M: Menu, I: MenuInflater) {
@@ -92,27 +120,17 @@ class BookListFragment : Fragment() {
 		return true
 	}
 
-	fun LaunchEditBookFragment(B: Book, EditParam: Bundle?) {
-		val BookInformation = bundleOf("Title" to B.Title)
-		val Params: Bundle = bundleOf("Book" to BookInformation, "EditParam" to EditParam)
-		parentFragmentManager.beginTransaction().apply {
-			replace(((view as ViewGroup).parent as View).id, EditBookFragment.newInstance(Params))
-			addToBackStack(null)
-			commit()
-		}
-	}
-
 	override fun onContextItemSelected(MItem: MenuItem): Boolean {
 		when (MItem.title) {
 			"新建" -> {
 				val EditParam = Bundle()
 				EditParam.putString("Mode", "New")
-				LaunchEditBookFragment(Book(), EditParam)
+				EditBookActivityLauncher.launch(Pair(Book(), EditParam))
 			}
 			"编辑" -> {
 				val EditParam = Bundle()
 				EditParam.putString("Mode", "Edit")
-				LaunchEditBookFragment(MainBooksAdapter.BookList[MainBooksAdapter.MPosition], EditParam)
+				EditBookActivityLauncher.launch(Pair(MainBooksAdapter.BookList[MainBooksAdapter.MPosition], EditParam))
 			}
 			"删除" -> {
 				MainBooksAdapter.DeleteBookItem(MainBooksAdapter.MPosition)
