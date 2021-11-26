@@ -16,6 +16,7 @@ open class PageAdapter(FAWithViewPager2: FragmentActivity, val TabCount: Int) : 
 	override fun createFragment(Pos: Int): Fragment {
 		return when (Pos) {
 			0 -> BookListFragment()
+			1 -> MessageFragment()
 			else -> DemoFragment()
 		}
 	}

@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import top.abr.androidexp6.databinding.FragmentMessageBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +24,11 @@ class MessageFragment : Fragment() {
 	private var param1: String? = null
 	private var param2: String? = null
 
+	val DefaultURL = "https://news.sina.cn"
+
+	lateinit var FragmentMessage: FragmentMessageBinding
+	lateinit var WebpageView: WebView
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		arguments?.let {
@@ -31,6 +40,20 @@ class MessageFragment : Fragment() {
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.fragment_message, container, false)
+	}
+
+	override fun onViewCreated(V: View, SavedInstanceState: Bundle?) {
+		super.onViewCreated(V, SavedInstanceState)
+
+		FragmentMessage = FragmentMessageBinding.inflate(layoutInflater)
+		WebpageView = FragmentMessage.WebpageView
+		WebpageView.webViewClient = object : WebViewClient() {
+			override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+				return false
+			}
+		}
+		WebpageView.settings.javaScriptEnabled = true
+		WebpageView.loadUrl(DefaultURL)
 	}
 
 	companion object {
