@@ -37,17 +37,19 @@ class MessageFragment : Fragment() {
 		}
 	}
 
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+	override fun onCreateView(LI: LayoutInflater, Container: ViewGroup?, SavedInstanceState: Bundle?): View? {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_message, container, false)
+//		return LI.inflate(R.layout.fragment_message, Container, false)
+		FragmentMessage = FragmentMessageBinding.inflate(LI, Container, false)
+		return FragmentMessage.root
 	}
 
 	override fun onViewCreated(V: View, SavedInstanceState: Bundle?) {
 		super.onViewCreated(V, SavedInstanceState)
 
-		FragmentMessage = FragmentMessageBinding.inflate(layoutInflater)
-//		WebpageView = FragmentMessage.WebpageView
-		WebpageView = V.findViewById(R.id.WebpageView)
+//		FragmentMessage = FragmentMessageBinding.inflate(layoutInflater)
+		WebpageView = FragmentMessage.WebpageView
+//		WebpageView = V.findViewById(R.id.WebpageView)
 		WebpageView.webViewClient = object : WebViewClient() {
 			override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
 				return false
