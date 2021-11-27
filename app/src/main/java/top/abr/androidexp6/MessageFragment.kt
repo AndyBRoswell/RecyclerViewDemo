@@ -46,7 +46,8 @@ class MessageFragment : Fragment() {
 		super.onViewCreated(V, SavedInstanceState)
 
 		FragmentMessage = FragmentMessageBinding.inflate(layoutInflater)
-		WebpageView = FragmentMessage.WebpageView
+//		WebpageView = FragmentMessage.WebpageView
+		WebpageView = V.findViewById(R.id.WebpageView)
 		WebpageView.webViewClient = object : WebViewClient() {
 			override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
 				return false
