@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.baidu.mapapi.CoordType
+import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.map.BaiduMap
 import com.baidu.mapapi.map.LogoPosition
 import com.baidu.mapapi.map.MapView
@@ -34,6 +36,9 @@ class MapViewFragment : Fragment() {
 			param1 = it.getString(ARG_PARAM1)
 			param2 = it.getString(ARG_PARAM2)
 		}
+
+		SDKInitializer.initialize(this.activity)
+		SDKInitializer.setCoordType(CoordType.BD09LL)
 	}
 
 	override fun onCreateView(LI: LayoutInflater, Container: ViewGroup?, SavedInstanceState: Bundle?): View? {
@@ -47,6 +52,21 @@ class MapViewFragment : Fragment() {
 		MBaiduMap = BaiduMapView.map
 		MBaiduMap.mapType = BaiduMap.MAP_TYPE_NORMAL
 		BaiduMapView.logoPosition = LogoPosition.logoPostionCenterTop
+	}
+
+	override fun onResume() {
+		super.onResume()
+		BaiduMapView.onResume()
+	}
+
+	override fun onPause() {
+		super.onPause()
+		BaiduMapView.onPause()
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
+		BaiduMapView.onDestroy()
 	}
 
 	companion object {
