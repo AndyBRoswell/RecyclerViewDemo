@@ -37,7 +37,7 @@ class MapViewFragment : Fragment() {
 			param2 = it.getString(ARG_PARAM2)
 		}
 
-		SDKInitializer.initialize(this.activity)
+		SDKInitializer.initialize(this.requireActivity().applicationContext)
 		SDKInitializer.setCoordType(CoordType.BD09LL)
 	}
 
@@ -55,7 +55,7 @@ class MapViewFragment : Fragment() {
 		val MMapStatus = MapStatus.Builder().target(DefaultInitialPosition).build()
 		val MMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(MMapStatus)
 		MBaiduMap.setMapStatus(MMapStatusUpdate)
-		val MarkerBitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher_foreground)
+		val MarkerBitmap = BitmapDescriptorFactory.fromResource(R.drawable.marker)
 		val MarkerOption = MarkerOptions().position(DefaultInitialPosition).icon(MarkerBitmap)
 		MBaiduMap.addOverlay(MarkerOption)
 	}
