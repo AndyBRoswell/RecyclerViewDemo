@@ -54,7 +54,7 @@ class MapViewFragment : Fragment() {
 		BaiduMapView.logoPosition = LogoPosition.logoPostionCenterTop
 		val MMapStatus = MapStatus.Builder().target(DefaultInitialPosition).build()
 		val MMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(MMapStatus)
-		MBaiduMap.mapStatus = MMapStatusUpdate
+		MBaiduMap.setMapStatus(MMapStatusUpdate)
 		val MarkerBitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher_foreground)
 		val MarkerOption = MarkerOptions().position(DefaultInitialPosition).icon(MarkerBitmap)
 		MBaiduMap.addOverlay(MarkerOption)
