@@ -29,6 +29,7 @@ class MapViewFragment : Fragment() {
 	lateinit var BaiduMapView: MapView
 	lateinit var MBaiduMap: BaiduMap
 	val DefaultInitialPosition = LatLng(113.541112, 22.255925)
+	lateinit var MapMarker: Marker
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -57,7 +58,7 @@ class MapViewFragment : Fragment() {
 		MBaiduMap.setMapStatus(MMapStatusUpdate)
 		val MarkerBitmap = BitmapDescriptorFactory.fromResource(R.drawable.marker)
 		val MarkerOption = MarkerOptions().position(DefaultInitialPosition).icon(MarkerBitmap)
-		MBaiduMap.addOverlay(MarkerOption)
+		MapMarker = MBaiduMap.addOverlay(MarkerOption) as Marker
 	}
 
 	override fun onResume() {
