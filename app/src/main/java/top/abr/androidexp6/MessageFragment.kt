@@ -37,7 +37,7 @@ class MessageFragment : Fragment() {
 		}
 	}
 
-	override fun onCreateView(LI: LayoutInflater, Container: ViewGroup?, SavedInstanceState: Bundle?): View? {
+	override fun onCreateView(LI: LayoutInflater, Container: ViewGroup?, SavedInstanceState: Bundle?): View {
 		// Inflate the layout for this fragment
 //		return LI.inflate(R.layout.fragment_message, Container, false)
 		FragmentMessage = FragmentMessageBinding.inflate(LI, Container, false)

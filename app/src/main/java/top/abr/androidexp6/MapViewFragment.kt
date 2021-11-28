@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.baidu.mapapi.CoordType
 import com.baidu.mapapi.SDKInitializer
-import com.baidu.mapapi.map.BaiduMap
-import com.baidu.mapapi.map.LogoPosition
-import com.baidu.mapapi.map.MapView
+import com.baidu.mapapi.map.*
+import com.baidu.mapapi.model.LatLng
 import top.abr.androidexp6.databinding.FragmentMapViewBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,6 +28,7 @@ class MapViewFragment : Fragment() {
 	lateinit var FragmentMapView: FragmentMapViewBinding
 	lateinit var BaiduMapView: MapView
 	lateinit var MBaiduMap: BaiduMap
+	val DefaultInitialPosition = LatLng(113.541112, 22.255925)
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class MapViewFragment : Fragment() {
 		SDKInitializer.setCoordType(CoordType.BD09LL)
 	}
 
-	override fun onCreateView(LI: LayoutInflater, Container: ViewGroup?, SavedInstanceState: Bundle?): View? {
+	override fun onCreateView(LI: LayoutInflater, Container: ViewGroup?, SavedInstanceState: Bundle?): View {
 		// Inflate the layout for this fragment
 		FragmentMapView = FragmentMapViewBinding.inflate(LI, Container, false)
 		return FragmentMapView.root
@@ -52,6 +52,12 @@ class MapViewFragment : Fragment() {
 		MBaiduMap = BaiduMapView.map
 		MBaiduMap.mapType = BaiduMap.MAP_TYPE_NORMAL
 		BaiduMapView.logoPosition = LogoPosition.logoPostionCenterTop
+		val MMapStatus = MapStatus.Builder().target(DefaultInitialPosition).build()
+		val MMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(MMapStatus)
+		MBaiduMap.mapStatus = MMapStatusUpdate
+		val MarkerBitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher_foreground)
+		val MarkerOption = MarkerOptions().position(DefaultInitialPosition).icon(MarkerBitmap)
+		MBaiduMap.addOverlay(MarkerOption)
 	}
 
 	override fun onResume() {
