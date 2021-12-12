@@ -56,7 +56,7 @@ class MapViewFragment : Fragment() {
         val MMapStatus = MapStatus.Builder().target(DefaultInitialPosition).build()
         val MMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(MMapStatus)
         MBaiduMap.setMapStatus(MMapStatusUpdate)
-        val MarkerBitmap = BitmapDescriptorFactory.fromResource(R.drawable.marker)
+        val MarkerBitmap = BitmapDescriptorFactory.fromResource(R.drawable.default_marker)
         val MarkerOption = MarkerOptions().position(DefaultInitialPosition).icon(MarkerBitmap)
         MapMarker = MBaiduMap.addOverlay(MarkerOption) as Marker
     }
