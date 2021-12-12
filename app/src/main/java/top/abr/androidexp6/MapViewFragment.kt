@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.baidu.mapapi.CoordType
 import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.map.*
@@ -53,12 +54,18 @@ class MapViewFragment : Fragment() {
         MBaiduMap = BaiduMapView.map
         MBaiduMap.mapType = BaiduMap.MAP_TYPE_NORMAL
         BaiduMapView.logoPosition = LogoPosition.logoPostionCenterTop
+
         val MMapStatus = MapStatus.Builder().target(DefaultInitialPosition).build()
         val MMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(MMapStatus)
         MBaiduMap.setMapStatus(MMapStatusUpdate)
+
         val MarkerBitmap = BitmapDescriptorFactory.fromResource(R.drawable.default_marker)
         val MarkerOption = MarkerOptions().position(DefaultInitialPosition).icon(MarkerBitmap)
         MapMarker = MBaiduMap.addOverlay(MarkerOption) as Marker
+        MBaiduMap.setOnMarkerClickListener {
+            Toast.makeText(this@MapViewFragment.activity, "点击了Marker", Toast.LENGTH_SHORT).show()
+            false
+        }
     }
 
     override fun onResume() {
