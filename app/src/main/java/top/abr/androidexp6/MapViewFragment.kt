@@ -31,7 +31,7 @@ class MapViewFragment : Fragment() {
     lateinit var FragmentMapView: FragmentMapViewBinding
     lateinit var BaiduMapView: MapView
     lateinit var MBaiduMap: BaiduMap
-//    lateinit var MapMarker: Marker
+    //    lateinit var MapMarker: Marker
     val DefaultInitialPosition = LatLng(22.255925, 113.541112)      // LATITUDE first, and then LONGITUDE
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,21 +64,24 @@ class MapViewFragment : Fragment() {
         val ZoomMultiple = 0.25f
         val MarkerBitmap = Utils.ZoomBitmap(BitmapFactory.decodeResource(resources, R.drawable.default_marker), ZoomMultiple)
         val MarkerBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(MarkerBitmap)
-        val ShopList = ShopLoader.parsonJson(ShopLoader.download())
-        for (Shop in ShopList) {
-            val Position = LatLng(Shop.Latitude, Shop.Longitude)
-            val MarkerOptions = MarkerOptions().position(Position).icon(MarkerBitmapDescriptor)
-            MBaiduMap.addOverlay(MarkerOptions) as Marker
-            MBaiduMap.setOnMarkerClickListener {
-                Toast.makeText(this@MapViewFragment.activity, "点击了Marker", Toast.LENGTH_SHORT).show()
-                false
+
+        Thread {
+            val ShopList = ShopLoader.parsonJson(ShopLoader.download("http://file.nidama.net/class/mobile_develop/data/bookstore.json"))
+            for (Shop in ShopList) {
+                val Position = LatLng(Shop.Latitude, Shop.Longitude)
+                val MarkerOptions = MarkerOptions().position(Position).icon(MarkerBitmapDescriptor)
+                MBaiduMap.addOverlay(MarkerOptions) as Marker
+                MBaiduMap.setOnMarkerClickListener {
+                    Toast.makeText(this@MapViewFragment.activity, "点击了Marker", Toast.LENGTH_SHORT).show()
+                    false
+                }
+                val BgRGB = 0xAAFFFF00.toInt()
+                val FontRGB = 0xFFFF00FF.toInt()
+                val FontSize = 30
+                val TextOptions = TextOptions().bgColor(BgRGB).fontColor(FontRGB).fontSize(FontSize).text(Shop.Name).position(Position)
+                MBaiduMap.addOverlay(TextOptions)
             }
-            val BgRGB = 0xAAFFFF00.toInt()
-            val FontRGB = 0xFFFF00FF.toInt()
-            val FontSize = 30
-            val TextOptions = TextOptions().bgColor(BgRGB).fontColor(Font).fontSize(FontSize).text(Shop.Name).position(Position)
-            MBaiduMap.addOverlay(TextOptions)
-        }
+        }.start()
     }
 
     override fun onResume() {
