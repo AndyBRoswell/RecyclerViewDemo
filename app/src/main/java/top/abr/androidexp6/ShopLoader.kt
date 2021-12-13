@@ -1,6 +1,7 @@
 package top.abr.androidexp6
 
 import org.json.JSONArray
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -38,7 +39,7 @@ open class ShopLoader {
 
         fun parsonJson(JSONString: String): ArrayList<Shop> {
             val ShopList = ArrayList<Shop>()
-            val ShopData = JSONArray(JSONString)
+            val ShopData = JSONArray(JSONObject(JSONString).getJSONArray("shops"))
             for (i in 0 until ShopData.length()) {
                 val ShopDataItem = ShopData.getJSONObject(i)
                 ShopList.add(

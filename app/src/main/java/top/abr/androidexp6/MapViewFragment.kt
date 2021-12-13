@@ -66,7 +66,7 @@ class MapViewFragment : Fragment() {
         val MarkerBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(MarkerBitmap)
 
         Thread {
-            val ShopList = ShopLoader.parsonJson(ShopLoader.download("http://file.nidama.net/class/mobile_develop/data/bookstore.json"))
+            val ShopList = ShopLoader.parsonJson(ShopLoader.download("https://file.nidama.net/class/mobile_develop/data/bookstore.json"))
             for (Shop in ShopList) {
                 val Position = LatLng(Shop.Latitude, Shop.Longitude)
                 val MarkerOptions = MarkerOptions().position(Position).icon(MarkerBitmapDescriptor)
