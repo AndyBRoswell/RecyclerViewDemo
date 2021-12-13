@@ -32,7 +32,10 @@ open class ShopLoader {
         }
 
         fun parsonJson(JSONString: String): ArrayList<Shop> {
+            val Shops = JSONArray(JSONString)
+            for (i in 0 until Shops.length()) {
 
+            }
         }
     }
 }
