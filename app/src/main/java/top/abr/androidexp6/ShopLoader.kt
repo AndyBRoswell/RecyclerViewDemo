@@ -1,13 +1,11 @@
 package top.abr.androidexp6
 
-import org.json.JSONArray
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.math.*
-import kotlin.properties.Delegates
 
 open class Shop(val Name: String = "", val Longitude: Double = 0.0, val Latitude: Double = 0.0, val Memo: String = "") {
     init {
