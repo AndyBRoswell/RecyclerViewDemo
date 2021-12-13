@@ -30,7 +30,6 @@ class MapViewFragment : Fragment() {
     lateinit var FragmentMapView: FragmentMapViewBinding
     lateinit var BaiduMapView: MapView
     lateinit var MBaiduMap: BaiduMap
-    //    lateinit var MapMarker: Marker
     val DefaultInitialPosition = LatLng(22.255925, 113.541112)      // LATITUDE first, and then LONGITUDE
 
     override fun onCreate(savedInstanceState: Bundle?) {
