@@ -7,13 +7,9 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.math.*
+import kotlin.properties.Delegates
 
-open class Shop(Name: String = "", Longitude: Double = 0.0, Latitude: Double = 0.0, Memo: String = "") {
-    var Name: String = ""
-    var Longitude: Double = 0.0
-    var Latitude: Double = 0.0
-    var Memo: String = ""
-
+open class Shop(val Name: String = "", val Longitude: Double = 0.0, val Latitude: Double = 0.0, val Memo: String = "") {
     init {
         if ((abs(Longitude) > 180.0) or (abs(Latitude) > 90.0)) throw IllegalArgumentException()
     }
