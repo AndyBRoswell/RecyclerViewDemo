@@ -2,6 +2,7 @@ package top.abr.androidexp6
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Message
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -78,6 +79,8 @@ class MapViewFragment : Fragment() {
                 val FontSize = 30
                 val TextOptions = TextOptions().bgColor(BgRGB).fontColor(FontRGB).fontSize(FontSize).text(Shop.Name).position(Position)
                 MBaiduMap.addOverlay(TextOptions)
+                val M = Message()
+                val B = Bundle()
             }
         }.start()
     }
