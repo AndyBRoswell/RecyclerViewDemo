@@ -1,5 +1,6 @@
 package top.abr.androidexp6
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,7 +30,7 @@ class MapViewFragment : Fragment() {
     lateinit var FragmentMapView: FragmentMapViewBinding
     lateinit var BaiduMapView: MapView
     lateinit var MBaiduMap: BaiduMap
-    lateinit var MapMarker: Marker
+//    lateinit var MapMarker: Marker
     val DefaultInitialPosition = LatLng(22.255925, 113.541112)      // LATITUDE first, and then LONGITUDE
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,12 +60,18 @@ class MapViewFragment : Fragment() {
         val MMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(MMapStatus)
         MBaiduMap.setMapStatus(MMapStatusUpdate)
 
-        val MarkerBitmap = BitmapDescriptorFactory.fromResource(R.drawable.default_marker)
-        val MarkerOption = MarkerOptions().position(DefaultInitialPosition).icon(MarkerBitmap)
-        MapMarker = MBaiduMap.addOverlay(MarkerOption) as Marker
-        MBaiduMap.setOnMarkerClickListener {
-            Toast.makeText(this@MapViewFragment.activity, "点击了Marker", Toast.LENGTH_SHORT).show()
-            false
+        val ZoomMultiple = 0.25f
+        val MarkerBitmap = Utils.ZoomBitmap(BitmapFactory.decodeResource(resources, R.drawable.default_marker), ZoomMultiple)
+        val MarkerBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(MarkerBitmap)
+        val ShopList = ShopLoader.parsonJson(ShopLoader.download())
+        for (Shop in ShopList) {
+            val Position = LatLng(Shop.Latitude, Shop.Longitude)
+            val MarkerOption = MarkerOptions().position(Position).icon(MarkerBitmapDescriptor)
+            MBaiduMap.addOverlay(MarkerOption) as Marker
+            MBaiduMap.setOnMarkerClickListener {
+                Toast.makeText(this@MapViewFragment.activity, "点击了Marker", Toast.LENGTH_SHORT).show()
+                false
+            }
         }
     }
 
