@@ -36,14 +36,7 @@ open class ShopLoader {
             val ShopData = JSONObject(JSONString).getJSONArray("shops")
             for (i in 0 until ShopData.length()) {
                 val ShopDataItem = ShopData.getJSONObject(i)
-                ShopList.add(
-                    Shop(
-                        ShopDataItem.getString("name"),
-                        ShopDataItem.getDouble("longitude"),
-                        ShopDataItem.getDouble("latitude"),
-                        ShopDataItem.getString("memo")
-                    )
-                )
+                ShopList.add(Shop(ShopDataItem.getString("name"), ShopDataItem.getDouble("longitude"), ShopDataItem.getDouble("latitude"), ShopDataItem.getString("memo")))
             }
             return ShopList
         }
