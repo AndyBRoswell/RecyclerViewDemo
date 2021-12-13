@@ -1,6 +1,7 @@
 package top.abr.androidexp6
 
 import android.graphics.BitmapFactory
+import android.graphics.fonts.Font
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -66,12 +67,17 @@ class MapViewFragment : Fragment() {
         val ShopList = ShopLoader.parsonJson(ShopLoader.download())
         for (Shop in ShopList) {
             val Position = LatLng(Shop.Latitude, Shop.Longitude)
-            val MarkerOption = MarkerOptions().position(Position).icon(MarkerBitmapDescriptor)
-            MBaiduMap.addOverlay(MarkerOption) as Marker
+            val MarkerOptions = MarkerOptions().position(Position).icon(MarkerBitmapDescriptor)
+            MBaiduMap.addOverlay(MarkerOptions) as Marker
             MBaiduMap.setOnMarkerClickListener {
                 Toast.makeText(this@MapViewFragment.activity, "点击了Marker", Toast.LENGTH_SHORT).show()
                 false
             }
+            val BgRGB = 0xAAFFFF00.toInt()
+            val FontRGB = 0xFFFF00FF.toInt()
+            val FontSize = 30
+            val TextOptions = TextOptions().bgColor(BgRGB).fontColor(Font).fontSize(FontSize).text(Shop.Name).position(Position)
+            MBaiduMap.addOverlay(TextOptions)
         }
     }
 
