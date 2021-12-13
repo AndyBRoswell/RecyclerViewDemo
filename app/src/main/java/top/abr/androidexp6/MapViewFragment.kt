@@ -55,12 +55,12 @@ class MapViewFragment : Fragment() {
         MBaiduMap.mapType = BaiduMap.MAP_TYPE_NORMAL
         BaiduMapView.logoPosition = LogoPosition.logoPostionCenterTop
 
-        val MMapStatus = MapStatus.Builder().target(DefaultInitialPosition).build()
+        val MMapStatus = MapStatus.Builder().target(DefaultInitialPosition).zoom(16.0f).build()
         val MMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(MMapStatus)
         MBaiduMap.setMapStatus(MMapStatusUpdate)
 
-        val ZoomMultiple = 0.25f
-        val MarkerBitmap = Utils.ZoomBitmap(BitmapFactory.decodeResource(resources, R.drawable.default_marker), ZoomMultiple)
+        val MarkerZoomMultiple = 0.25f
+        val MarkerBitmap = Utils.ZoomBitmap(BitmapFactory.decodeResource(resources, R.drawable.default_marker), MarkerZoomMultiple)
         val MarkerBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(MarkerBitmap)
 
         Thread {
