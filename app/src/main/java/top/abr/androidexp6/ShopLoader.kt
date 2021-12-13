@@ -9,7 +9,7 @@ import kotlin.math.*
 
 open class Shop(val Name: String = "", val Longitude: Double = 0.0, val Latitude: Double = 0.0, val Memo: String = "") {
     init {
-        if ((abs(Longitude) > 180.0) or (abs(Latitude) > 90.0)) throw IllegalArgumentException()
+        if ((abs(Longitude) > 180.0) or (abs(Latitude) > 90.0)) throw IllegalArgumentException("经度的范围是 [-180d, 180d]，纬度的范围是 [-90d, 90d]。")
     }
 }
 
