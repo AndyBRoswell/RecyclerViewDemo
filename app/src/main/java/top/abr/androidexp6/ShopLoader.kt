@@ -39,7 +39,7 @@ open class ShopLoader {
 
         fun parsonJson(JSONString: String): ArrayList<Shop> {
             val ShopList = ArrayList<Shop>()
-            val ShopData = JSONArray(JSONObject(JSONString).getJSONArray("shops"))
+            val ShopData = JSONObject(JSONString).getJSONArray("shops")
             for (i in 0 until ShopData.length()) {
                 val ShopDataItem = ShopData.getJSONObject(i)
                 ShopList.add(
