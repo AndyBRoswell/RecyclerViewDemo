@@ -6,7 +6,7 @@ import java.io.InputStreamReader
 import java.net.URL
 import kotlin.math.*
 
-open class Shop(Name: String, Longitude: Double, Latitude: Double, Memo: String) {
+open class Shop(Name: String = "", Longitude: Double = 0.0, Latitude: Double = 0.0, Memo: String = "") {
     var Name: String = ""
     var Longitude: Double = 0.0
     var Latitude: Double = 0.0
@@ -32,10 +32,18 @@ open class ShopLoader {
         }
 
         fun parsonJson(JSONString: String): ArrayList<Shop> {
-            val Shops = JSONArray(JSONString)
-            for (i in 0 until Shops.length()) {
-
+            val Shops = ArrayList<Shop>()
+            val ShopData = JSONArray(JSONString)
+            for (i in 0 until ShopData.length()) {
+                val ShopDataItem = ShopData.getJSONObject(i)
+                Shops.add(Shop(
+                    ShopDataItem.getString("name"),
+                    ShopDataItem.getDouble("longitude"),
+                    ShopDataItem.getDouble("latitude"),
+                    ShopDataItem.getString("memo")
+                ))
             }
+            return Shops
         }
     }
 }
