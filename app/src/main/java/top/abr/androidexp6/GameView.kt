@@ -1,9 +1,9 @@
 package top.abr.androidexp6
 
 import android.content.Context
-import android.graphics.Canvas
 import android.graphics.Color
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 
@@ -32,7 +32,11 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
         }
     }
 
-    private val DrawingThreads = ArrayList<DrawingThread>()
+    private inner class Coordinate(var x: Float = 0.0f, var y: Float = 0.0f)
+
+    private lateinit var MainDrawingThread: DrawingThread
+    private var TouchCoord = Coordinate(-1.0f, -1.0f)
+    private var Touched = false
     private var Hit = 0L
     private var Missed = 0L
 
@@ -46,7 +50,14 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
     }
 
     override fun surfaceCreated(Holder: SurfaceHolder) {
-
+        this@GameView.setOnTouchListener { V, Motion ->
+            if (Motion.action == MotionEvent.ACTION_DOWN) {
+                TouchCoord = Coordinate(Motion.x, Motion.y)
+                Touched = true
+            }
+            false
+        }
+        MainDrawingThread = DrawingThread().apply { start() }
     }
 
     override fun surfaceChanged(Holder: SurfaceHolder, Format: Int, Width: Int, Height: Int) {}
