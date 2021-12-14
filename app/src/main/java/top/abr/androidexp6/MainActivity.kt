@@ -18,14 +18,15 @@ open class PageAdapter(FAWithViewPager2: FragmentActivity, val TabCount: Int) : 
             0 -> BookListFragment()
             1 -> MessageFragment()
             2 -> MapViewFragment()
+            3 -> GameFragment()
             else -> DemoFragment()
         }
     }
 }
 
 class MainActivity : AppCompatActivity() {
-    val HOME_TAB_COUNT = 3
-    val TabTitle = arrayOf("图书", "新闻", "卖家")
+    val HOME_TAB_COUNT = 4
+    val TabTitle = arrayOf("图书", "新闻", "卖家", "游戏")
 
     lateinit var ActivityMain: ActivityMainBinding
     lateinit var TabSelector: TabLayout

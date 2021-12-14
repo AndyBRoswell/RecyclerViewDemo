@@ -16,14 +16,12 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
     }
 
     override fun surfaceCreated(Holder: SurfaceHolder) {
-        TODO("Not yet implemented")
+
     }
 
-    override fun surfaceChanged(Holder: SurfaceHolder, Format: Int, Width: Int, Height: Int) {
-        TODO("Not yet implemented")
-    }
+    override fun surfaceChanged(Holder: SurfaceHolder, Format: Int, Width: Int, Height: Int) {}
 
     override fun surfaceDestroyed(Holder: SurfaceHolder) {
-        TODO("Not yet implemented")
+        
     }
 }
