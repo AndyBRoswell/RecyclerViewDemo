@@ -30,7 +30,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                 if (this@GameView.Touched) {
                     for (Sprite in Sprites) {
                         if (Sprite.Shot(TouchCoord)) {
-
+                            ++Hit
                         }
                     }
                 }

@@ -1,10 +1,14 @@
 package top.abr.androidexp6
 
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 
 typealias GraphicCoordCpntType = Float
 
 class SquareSprite {
+    private val Pattern = "\uD83E\uDD9F"
+
     var CenterCoord: Coord2D<GraphicCoordCpntType>
     var MaxCoord: Coord2D<GraphicCoordCpntType>
     var EdgeLength: GraphicCoordCpntType
@@ -51,6 +55,7 @@ class SquareSprite {
     }
 
     fun DrawAt(Canvas: Canvas) {
-
+        val Paint = Paint().apply { color = Color.BLACK }
+        Canvas.drawText(Pattern, CenterCoord.x, CenterCoord.y, Paint)
     }
 }
