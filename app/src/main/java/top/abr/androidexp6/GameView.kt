@@ -2,6 +2,7 @@ package top.abr.androidexp6
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -31,6 +32,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                     for (Sprite in Sprites) {
                         if (Sprite.Shot(TouchCoord)) {
                             ++Hit
+
                         }
                     }
                 }
@@ -38,6 +40,12 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                     Sprite.Move()
                     Sprite.DrawAt(Canvas)
                 }
+                this@GameView.Touched = false
+                val Paint = Paint().apply {
+                    textSize = 100F
+                    color = Color.GREEN
+                }
+                Canvas.drawText("Hit: $Hit    Missed: $Missed", 100F, 100F, Paint)
             }
         }
     }
