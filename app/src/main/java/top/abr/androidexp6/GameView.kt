@@ -58,6 +58,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                     color = Color.GREEN
                 }
                 Canvas.drawText("Hit: $Hit    Missed: $Missed", 100F, 100F, Paint)
+                holder.unlockCanvasAndPost(Canvas)
             }
         }
     }
@@ -78,7 +79,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
     }
 
     override fun surfaceCreated(Holder: SurfaceHolder) {
-        this@GameView.setOnTouchListener { V, Motion ->
+        setOnTouchListener { V, Motion ->
             if (Motion.action == MotionEvent.ACTION_DOWN) {
                 TouchCoord = Coord2D(Motion.x, Motion.y)
                 Touched = true
