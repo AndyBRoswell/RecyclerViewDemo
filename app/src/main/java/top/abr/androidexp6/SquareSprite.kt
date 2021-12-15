@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import kotlin.math.min
 
-class SquareSprite {
+open class SquareSprite {
     companion object {
         private val Count0 = 20
         private val Pattern = "\uD83E\uDD9F"
