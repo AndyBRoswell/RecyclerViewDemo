@@ -13,15 +13,15 @@ class SquareSprite {
 
     var CenterCoord: GCoord2D
     var MaxCoord: GCoord2D
-    var EdgeLength: GCoordCpntT
+    var EdgeLength: GCoordCpnt
 
-    constructor(MaxCoord: GCoord2D, Coord: GCoord2D = Utils.RanGCoord2D(Origin, MaxCoord), EdgeLength: GCoordCpntT = min(MaxCoord.x, MaxCoord.y) / Count0) {
+    constructor(MaxCoord: GCoord2D, Coord: GCoord2D = Utils.RanGCoord2D(Origin, MaxCoord), EdgeLength: GCoordCpnt = min(MaxCoord.x, MaxCoord.y) / Count0) {
         this.CenterCoord = Coord
         this.EdgeLength = EdgeLength
         this.MaxCoord = MaxCoord
     }
 
-    constructor(xmax: GCoordCpntT, ymax: GCoordCpntT, x: GCoordCpntT = Utils.RanFP32(Origin.x, xmax), y: GCoordCpntT = Utils.RanFP32(Origin.y, ymax), EdgeLength: GCoordCpntT = min(xmax, ymax) / Count0) {
+    constructor(xmax: GCoordCpnt, ymax: GCoordCpnt, x: GCoordCpnt = Utils.RanFP32(Origin.x, xmax), y: GCoordCpnt = Utils.RanFP32(Origin.y, ymax), EdgeLength: GCoordCpnt = min(xmax, ymax) / Count0) {
         CenterCoord = Coord2D(x, y)
         this.EdgeLength = EdgeLength
         MaxCoord = Coord2D(xmax, ymax)
@@ -32,7 +32,7 @@ class SquareSprite {
         return (TouchCoord.x >= CenterCoord.x - Err) && (TouchCoord.x <= CenterCoord.x + Err) && (TouchCoord.y >= CenterCoord.y - Err) && (TouchCoord.y <= CenterCoord.y + Err)
     }
 
-    fun Shot(x: GCoordCpntT, y: GCoordCpntT): Boolean {
+    fun Shot(x: GCoordCpnt, y: GCoordCpnt): Boolean {
         val Err = EdgeLength
         return (x >= CenterCoord.x - Err) && (x <= CenterCoord.x + Err) && (y >= CenterCoord.y - Err) && (y <= CenterCoord.y + Err)
     }
@@ -46,7 +46,7 @@ class SquareSprite {
         }
     }
 
-    fun Move(DeltaX: GCoordCpntT, DeltaY: GCoordCpntT, CorrectEnabled: Boolean = false): Boolean {
+    fun Move(DeltaX: GCoordCpnt, DeltaY: GCoordCpnt, CorrectEnabled: Boolean = false): Boolean {
         CenterCoord.x += DeltaX
         CenterCoord.y += DeltaY
         return when (CorrectEnabled) {

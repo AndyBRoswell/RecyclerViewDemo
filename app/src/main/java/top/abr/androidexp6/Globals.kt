@@ -1,6 +1,6 @@
 package top.abr.androidexp6
 
-typealias GCoordCpntT = Float
-typealias GCoord2D = Coord2D<GCoordCpntT>
+typealias GCoordCpnt = Float
+typealias GCoord2D = Coord2D<GCoordCpnt>
 
 val Origin = Coord2D(0F, 0F)
