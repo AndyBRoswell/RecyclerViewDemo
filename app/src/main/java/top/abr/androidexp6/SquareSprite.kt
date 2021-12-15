@@ -22,11 +22,13 @@ class SquareSprite {
     }
 
     fun Shot(TouchCoord: Coord2D<GraphicCoordCpntType>): Boolean {
-
+        val Diff = EdgeLength / 2
+        return (TouchCoord.x >= CenterCoord.x - Diff) && (TouchCoord.x <= CenterCoord.x + Diff) && (TouchCoord.y >= CenterCoord.y - Diff) && (TouchCoord.y <= CenterCoord.y + Diff)
     }
 
     fun Shot(x: GraphicCoordCpntType, y: GraphicCoordCpntType): Boolean {
-
+        val Diff = EdgeLength / 2
+        return (x >= CenterCoord.x - Diff) && (x <= CenterCoord.x + Diff) && (y >= CenterCoord.y - Diff) && (y <= CenterCoord.y + Diff)
     }
 
     fun Move(DeltaC: Coord2D<GraphicCoordCpntType>) {
