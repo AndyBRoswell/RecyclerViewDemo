@@ -29,7 +29,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                     Sprite.CenterCoord = Utils.RanGCoord2D(Max = MaxCoord)
                 }
             }
-            val ExpectedSpriteCount = (InitSpriteCount + 0.1 * Hit).toInt()
+            val ExpectedSpriteCount = (InitSpriteCount + Hit / 10).toInt()
             if (ExpectedSpriteCount > Sprites.size) Sprites.add(SquareSprite(MaxCoord, EdgeLength = EdgeLen))
         }
 
@@ -58,7 +58,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                     textSize = 100F
                     color = Color.GREEN
                 }
-                Canvas.drawText("Hit: $Hit\nMissed: $Missed", 100F, 100F, Paint)
+                Canvas.drawText("Hit: $Hit, Missed: $Missed", 100F, 100F, Paint)
                 holder.unlockCanvasAndPost(Canvas)
             }
             sleep(16)
