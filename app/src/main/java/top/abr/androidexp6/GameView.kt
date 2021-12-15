@@ -7,15 +7,19 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import kotlin.math.min
 
 open class GameView : SurfaceView, SurfaceHolder.Callback {
     private inner class DrawingThread : Thread() {
+        private val MaxCoord = Coord2D(this@GameView.width.toFloat(), this@GameView.height.toFloat())
+        private val EdgeLen = min(MaxCoord.x, MaxCoord.y) / 16
+
         private val SpriteCount = 2
         private val Sprites = ArrayList<SquareSprite>()
         private var CanRun = true
 
         init {
-            for (i in 1..SpriteCount) Sprites.add(SquareSprite())
+            for (i in 1..SpriteCount) Sprites.add(SquareSprite(MaxCoord, EdgeLength = EdgeLen))
         }
 
         fun Stop() {
@@ -32,12 +36,20 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                     for (Sprite in Sprites) {
                         if (Sprite.Shot(TouchCoord)) {
                             ++Hit
-
+                            Sprite.CenterCoord = Utils.RanGCoord2D(Max = MaxCoord)
                         }
                     }
                 }
                 for (Sprite in Sprites) {
-                    Sprite.Move()
+                    val k = 0.01F
+                    val DeltaGCoord = Utils.RanGCoord2D(GCoord2D(-k * EdgeLen, -k * EdgeLen), GCoord2D(k * EdgeLen, k * EdgeLen))
+                    when (Sprite.Move(DeltaGCoord)) {
+                        false -> {}
+                        true -> {
+                            ++Missed
+                            Sprite.CenterCoord = Utils.RanGCoord2D(Max = MaxCoord)
+                        }
+                    }
                     Sprite.DrawAt(Canvas)
                 }
                 this@GameView.Touched = false

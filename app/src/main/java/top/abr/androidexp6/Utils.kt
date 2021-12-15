@@ -9,8 +9,8 @@ class Utils {
         private val RandomSource = Random()
 
         fun RanFP32(Min: Float, Max: Float) = RandomSource.nextFloat()
-        fun RanGCoord2D(Min: Coord2D<GCoordCpntType>, Max: Coord2D<GCoordCpntType>) = Coord2D(RanFP32(Min.x, Max.x), RanFP32(Min.y, Max.y))
-        fun RanGCoord2D(xmin: GCoordCpntType, xmax: GCoordCpntType, ymin: GCoordCpntType, ymax: GCoordCpntType) = Coord2D(RanFP32(xmin, xmax), RanFP32(ymin, ymax))
+        fun RanGCoord2D(Min: Coord2D<GCoordCpntT> = Origin, Max: Coord2D<GCoordCpntT>) = Coord2D(RanFP32(Min.x, Max.x), RanFP32(Min.y, Max.y))
+        fun RanGCoord2D(xmin: GCoordCpntT = Origin.x, xmax: GCoordCpntT, ymin: GCoordCpntT = Origin.y, ymax: GCoordCpntT) = Coord2D(RanFP32(xmin, xmax), RanFP32(ymin, ymax))
 
         fun ZoomBitmap(B: Bitmap, NewWidth: Int = B.width, NewHeight: Int = B.height): Bitmap {
             val WidthMultiple = NewWidth.toFloat() / B.width
