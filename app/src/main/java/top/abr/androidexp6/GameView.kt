@@ -41,7 +41,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                     }
                 }
                 for (Sprite in Sprites) {
-                    val k = 0.01F
+                    val k = 0.1F
                     val DeltaGCoord = Utils.RanGCoord2D(GCoord2D(-k * EdgeLen, -k * EdgeLen), GCoord2D(k * EdgeLen, k * EdgeLen))
                     when (Sprite.Move(DeltaGCoord)) {
                         false -> {}
@@ -57,7 +57,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                     textSize = 100F
                     color = Color.GREEN
                 }
-                Canvas.drawText("Hit: $Hit    Missed: $Missed", 100F, 100F, Paint)
+                Canvas.drawText("Hit: $Hit\nMissed: $Missed", 100F, 100F, Paint)
                 holder.unlockCanvasAndPost(Canvas)
             }
         }

@@ -79,7 +79,10 @@ class SquareSprite {
     }
 
     fun DrawAt(Canvas: Canvas) {
-        val Paint = Paint().apply { color = Color.BLACK }
+        val Paint = Paint().apply {
+            textSize = EdgeLength
+            color = Color.BLACK
+        }
         Canvas.drawText(Pattern, CenterCoord.x, CenterCoord.y, Paint)
     }
 }
