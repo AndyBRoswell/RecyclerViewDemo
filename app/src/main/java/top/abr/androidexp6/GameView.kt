@@ -8,7 +8,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 
 open class GameView : SurfaceView, SurfaceHolder.Callback {
-    private inner class DrawingThread() : Thread() {
+    private inner class DrawingThread : Thread() {
         private val SpriteCount = 2
         private val Sprites = ArrayList<Sprite>()
         private var CanRun = true
@@ -27,15 +27,23 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
             while (CanRun) {
                 val Canvas = holder.lockCanvas()
                 Canvas.drawColor(Color.GRAY)
+                if (this@GameView.Touched) {
+                    for (Sprite in Sprites) {
+                        if (Sprite.Shot()) {
 
+                        }
+                    }
+                }
+                for (Sprite in Sprites) {
+                    Sprite.Move()
+                    Sprite.DrawAt()
+                }
             }
         }
     }
 
-    private inner class Coordinate(var x: Float = 0.0f, var y: Float = 0.0f)
-
     private lateinit var MainDrawingThread: DrawingThread
-    private var TouchCoord = Coordinate(-1.0f, -1.0f)
+    private var TouchCoord = GraphicCoordinate(-1.0f, -1.0f)
     private var Touched = false
     private var Hit = 0L
     private var Missed = 0L
@@ -52,7 +60,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
     override fun surfaceCreated(Holder: SurfaceHolder) {
         this@GameView.setOnTouchListener { V, Motion ->
             if (Motion.action == MotionEvent.ACTION_DOWN) {
-                TouchCoord = Coordinate(Motion.x, Motion.y)
+                TouchCoord = GraphicCoordinate(Motion.x, Motion.y)
                 Touched = true
             }
             false
