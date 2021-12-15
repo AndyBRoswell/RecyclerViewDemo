@@ -2,9 +2,14 @@ package top.abr.androidexp6
 
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import java.util.*
 
 class Utils {
     companion object {
+        private val RandomSource = Random()
+
+        fun RanFloat(Min: Float, Max: Float) = RandomSource.nextFloat()
+
         fun ZoomBitmap(B: Bitmap, NewWidth: Int = B.width, NewHeight: Int = B.height): Bitmap {
             val WidthMultiple = NewWidth.toFloat() / B.width
             val HeightMultiple = NewHeight.toFloat() / B.height

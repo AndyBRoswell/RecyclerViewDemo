@@ -10,11 +10,11 @@ import android.view.SurfaceView
 open class GameView : SurfaceView, SurfaceHolder.Callback {
     private inner class DrawingThread : Thread() {
         private val SpriteCount = 2
-        private val Sprites = ArrayList<Sprite>()
+        private val Sprites = ArrayList<SquareSprite>()
         private var CanRun = true
 
         init {
-            for (i in 1..SpriteCount) Sprites.add(Sprite())
+            for (i in 1..SpriteCount) Sprites.add(SquareSprite())
         }
 
         fun Stop() {
@@ -29,14 +29,14 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                 Canvas.drawColor(Color.GRAY)
                 if (this@GameView.Touched) {
                     for (Sprite in Sprites) {
-                        if (Sprite.Shot()) {
+                        if (Sprite.Shot(TouchCoord)) {
 
                         }
                     }
                 }
                 for (Sprite in Sprites) {
                     Sprite.Move()
-                    Sprite.DrawAt()
+                    Sprite.DrawAt(Canvas)
                 }
             }
         }
@@ -71,6 +71,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
     override fun surfaceChanged(Holder: SurfaceHolder, Format: Int, Width: Int, Height: Int) {}
 
     override fun surfaceDestroyed(Holder: SurfaceHolder) {
-
+        MainDrawingThread.Stop()
+        MainDrawingThread.join()
     }
 }
