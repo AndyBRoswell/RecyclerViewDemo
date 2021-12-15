@@ -41,9 +41,9 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
             super.run()
             while (CanRun) {
                 val Canvas = holder.lockCanvas()
-                Canvas.drawColor(Color.GRAY)
+                Canvas.drawColor(Color.LTGRAY)
                 for (Sprite in Sprites) {
-                    val k = (0.2 + 0.005 * Hit).toFloat()
+                    val k = (0.1 + 0.005 * Hit).toFloat()
                     val DeltaGCoord = Utils.RanGCoord2D(GCoord2D(-k * EdgeLen, -k * EdgeLen), GCoord2D(k * EdgeLen, k * EdgeLen))
                     when (Sprite.Move(DeltaGCoord)) {
                         false -> {}
@@ -55,10 +55,11 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
                     Sprite.DrawAt(Canvas)
                 }
                 val Paint = Paint().apply {
-                    textSize = 100F
-                    color = Color.GREEN
+                    textSize = 80F
+                    color = Color.BLUE
                 }
-                Canvas.drawText("Hit: $Hit, Missed: $Missed", 100F, 100F, Paint)
+                Canvas.drawText("Hit $Hit", 0F, 80F, Paint)
+                Canvas.drawText("Missed $Missed", 0F, 160F, Paint)
                 holder.unlockCanvasAndPost(Canvas)
             }
             sleep(16)

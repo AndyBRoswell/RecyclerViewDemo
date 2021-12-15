@@ -28,13 +28,13 @@ class SquareSprite {
     }
 
     fun Shot(TouchCoord: GCoord2D): Boolean {
-        val Diff = EdgeLength / 2
-        return (TouchCoord.x >= CenterCoord.x - Diff) && (TouchCoord.x <= CenterCoord.x + Diff) && (TouchCoord.y >= CenterCoord.y - Diff) && (TouchCoord.y <= CenterCoord.y + Diff)
+        val Err = EdgeLength
+        return (TouchCoord.x >= CenterCoord.x - Err) && (TouchCoord.x <= CenterCoord.x + Err) && (TouchCoord.y >= CenterCoord.y - Err) && (TouchCoord.y <= CenterCoord.y + Err)
     }
 
     fun Shot(x: GCoordCpntT, y: GCoordCpntT): Boolean {
-        val Diff = EdgeLength / 2
-        return (x >= CenterCoord.x - Diff) && (x <= CenterCoord.x + Diff) && (y >= CenterCoord.y - Diff) && (y <= CenterCoord.y + Diff)
+        val Err = EdgeLength
+        return (x >= CenterCoord.x - Err) && (x <= CenterCoord.x + Err) && (y >= CenterCoord.y - Err) && (y <= CenterCoord.y + Err)
     }
 
     fun Move(DeltaC: GCoord2D, CorrectEnabled: Boolean = false): Boolean {
