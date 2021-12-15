@@ -11,13 +11,13 @@ class SquareSprite {
     var MaxCoord: Coord2D<GCoordCpntType>
     var EdgeLength: GCoordCpntType
 
-    constructor(MaxCoord: Coord2D<GCoordCpntType>, Coord: Coord2D<GCoordCpntType> = Utils.RanGraphicCoord2D(Origin, MaxCoord), EdgeLength: GCoordCpntType) {
+    constructor(MaxCoord: Coord2D<GCoordCpntType>, Coord: Coord2D<GCoordCpntType> = Utils.RanGCoord2D(Origin, MaxCoord), EdgeLength: GCoordCpntType) {
         this.CenterCoord = Coord
         this.EdgeLength = EdgeLength
         this.MaxCoord = MaxCoord
     }
 
-    constructor(xmax: GCoordCpntType, ymax: GCoordCpntType, x: GCoordCpntType = Utils.RanFloat(Origin.x, xmax), y: GCoordCpntType = Utils.RanFloat(Origin.y, ymax), EdgeLength: GCoordCpntType) {
+    constructor(xmax: GCoordCpntType, ymax: GCoordCpntType, x: GCoordCpntType = Utils.RanFP32(Origin.x, xmax), y: GCoordCpntType = Utils.RanFP32(Origin.y, ymax), EdgeLength: GCoordCpntType) {
         CenterCoord = Coord2D(x, y)
         this.EdgeLength = EdgeLength
         MaxCoord = Coord2D(xmax, ymax)
