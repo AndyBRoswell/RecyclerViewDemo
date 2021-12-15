@@ -43,7 +43,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
     }
 
     private lateinit var MainDrawingThread: DrawingThread
-    private var TouchCoord = GraphicCoordinate(-1.0f, -1.0f)
+    private var TouchCoord = Coord2D(-1.0f, -1.0f)
     private var Touched = false
     private var Hit = 0L
     private var Missed = 0L
@@ -60,7 +60,7 @@ open class GameView : SurfaceView, SurfaceHolder.Callback {
     override fun surfaceCreated(Holder: SurfaceHolder) {
         this@GameView.setOnTouchListener { V, Motion ->
             if (Motion.action == MotionEvent.ACTION_DOWN) {
-                TouchCoord = GraphicCoordinate(Motion.x, Motion.y)
+                TouchCoord = Coord2D(Motion.x, Motion.y)
                 Touched = true
             }
             false
